@@ -1,3 +1,5 @@
+﻿> **正本リポジトリ（GitHub Private）：** https://github.com/haruki00430/NDB_XXX_rehabilitation_regional
+
 # NDB_XXX_rehabilitation_regional
 
 ## テーマ

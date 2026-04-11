@@ -1,0 +1,80 @@
+project:
+  name: "NDB_XXX_rehabilitation_regional"
+  description: "回復期リハビリ提供量の地域格差と骨折アウトカムの生態学的関連"
+  experiment_mode: false
+
+data_sources:
+  ndb_root: "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub/02_Data/raw/NDB_OpenData/No.10"
+  project_root: "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub/projects/NDB_XXX_rehabilitation_regional"
+
+  rehabilitation:
+    path: "01_医科診療行為（算定回数）/01_公費レセプトを含まないデータ/H_リハビリテーション/都道府県別算定回数／単位数.xlsx"
+    header_rows: [0, 1, 2]
+
+  fracture_surgery:
+    path: "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub/projects/NDB_XXX_slope_fracture/03_Analysis/data/interim/fracture_surgery_site.csv"
+
+  population_stats:
+    path: "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub/projects/NDB_XXX_slope_fracture/03_Analysis/data/interim/statistics_2020.csv"
+
+rehab_codes:
+  musculoskeletal: "H000"   # 心大血管疾患リハビリ
+  stroke: "H001"            # 脳血管疾患等リハビリ
+  respiratory: "H003"       # 呼吸器リハビリ
+  disuse_syndrome: "H004"   # 廃用症候群リハビリ（最重要）
+
+fracture_codes:
+  hip_tka: "K082_THA"       # 大腿骨人工関節置換術
+  hip_hemi: "K081_Hemiarthroplasty"  # 人工骨頭挿入術
+
+variables:
+  exposure:
+    primary:
+      name: "rehab_total_rate"
+      label: "リハビリ総算定率（/人口10万人）"
+    secondary:
+      name: "disuse_rehab_rate"
+      label: "廃用症候群リハビリ算定率（H004, /人口10万人）"
+
+  outcomes:
+    - name: "hip_fracture_surgery_rate"
+      label: "大腿骨骨折手術率（K082-THA, /人口10万人）"
+    - name: "total_fracture_surgery_rate"
+      label: "全骨折手術率（/人口10万人）"
+
+  adjustments:
+    - name: "aging_rate"
+    - name: "pop_density"
+
+analysis:
+  sample_size: 47
+  regression:
+    method: "OLS"
+    significance_level: 0.05
+    vif_threshold: 5.0
+  sensitivity_analyses:
+    - {name: "Spec1_Baseline", covariates: ["aging_rate", "pop_density"]}
+    - {name: "Spec2_HC3", covariates: ["aging_rate", "pop_density"], robust: "HC3"}
+    - {name: "Spec3_OutlierExcluded", covariates: ["aging_rate", "pop_density"], outlier_exclusion: true}
+    - {name: "Spec4_MetropolisExcluded", covariates: ["aging_rate", "pop_density"], exclude_prefectures: ["東京都", "大阪府", "愛知県"]}
+    - {name: "Spec5_LogTransformed", covariates: ["aging_rate", "pop_density"], log_transform: true}
+    - {name: "Spec6_AgingOnly", covariates: ["aging_rate"]}
+  spatial:
+    run_morans_i: true
+
+output:
+  interim_dir: "02_Data/interim"
+  results_dir: "03_Analysis/results"
+  figures_dir: "03_Analysis/results/figures"
+  files:
+    rehabilitation_data: "rehabilitation_prefecture.csv"
+    fracture_data: "fracture_outcome.csv"
+    analysis_dataset: "analysis_dataset.csv"
+    regression_results: "regression_results.csv"
+    sensitivity_results: "sensitivity_analysis_results.csv"
+
+visualization:
+  font: "Meiryo"
+  dpi: 300
+  figure_size: [10, 8]
+  colormap: "viridis"

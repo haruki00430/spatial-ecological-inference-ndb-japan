@@ -1,0 +1,242 @@
+---
+title: "Regional Disparities in Rehabilitation Provision and Hip Fracture Surgery Rates Among Older Adults in Japan: A Nationwide Ecological Study"
+author:
+  - name: "[Author 1]"
+    affiliation: "[Affiliation 1]"
+  - name: "[Author 2]"
+    affiliation: "[Affiliation 2]"
+date: "2026-04-15"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    embed-resources: true
+  docx:
+    toc: false
+    number-sections: false
+bibliography: references.bib
+csl: vancouver.csl
+---
+
+# Abstract
+
+**Background:** Regional disparities in rehabilitation provision are well documented in Japan, yet their ecological association with hip fracture surgery rates remains unclear. We examined whether prefecture-level rehabilitation claim rates (H000–H004) were associated with hip fracture surgery rates among older adults using nationwide open data.
+
+**Methods:** Cross-sectional ecological study of Japan's 47 prefectures. Rehabilitation claim rates (total; disuse-syndrome rehabilitation, H002; musculoskeletal rehabilitation, H003) per 100,000 population were derived from NDB Open Data No.10 (FY2023). Hip fracture surgery rates (K044/K045/K046/K081/K082 with femoral site codes, per 100,000) were derived from the same database. Covariates included aging rate and population density from the 2020 Census. Ordinary least squares (OLS) regression with six pre-specified sensitivity specifications was applied (Spec1: baseline; Spec2: HC3 robust standard errors; Spec3: outlier exclusion ±3 IQR; Spec4: metropolitan exclusion; Spec5: log-transformed; Spec6: aging rate only). Spatial autocorrelation was assessed with Global Moran's I.
+
+**Results:** Mean rehabilitation total claim rate was 88,389 (SD 35,945) per 100,000, ranging 3.3-fold across prefectures (Iwate 27,183 to Kagoshima 183,490). Mean hip fracture surgery rate was 254.0 (SD 37.6) per 100,000. Pearson correlation between rehabilitation total rate and hip fracture rate was r = 0.447 (p = 0.002). In adjusted OLS models, rehabilitation total rate was positively associated with hip fracture rate (β = 0.0005; 95% CI, 0.0003–0.0007; p < 0.001; R² = 0.51) across all six sensitivity specifications. Similar positive associations were observed for disuse-syndrome rehabilitation (H002: β = 0.0005, 6/6 specifications significant) and musculoskeletal rehabilitation (H003: β = 0.040, 6/6 specifications significant). Both variables exhibited strong spatial autocorrelation (Moran's I = 0.547, p = 0.001 for rehabilitation; I = 0.563, p = 0.001 for fracture rate).
+
+**Conclusions:** Contrary to hypothesis, rehabilitation provision was positively—not inversely—associated with hip fracture surgery rates at the prefectural level. This pattern likely reflects supply-induced demand, confounding by unmeasured case-mix severity, or reverse causality rather than a harmful effect. The strong spatial clustering of both variables warrants spatial econometric modelling in future research.
+
+**Keywords:** rehabilitation; hip fracture; regional disparities; ecological study; Japan; NDB Open Data; spatial autocorrelation
+
+---
+
+# Introduction
+
+Hip fracture is a major cause of disability, institutionalization, and mortality among older adults in Japan, with incidence rates among the highest in Asia [@yoshimuraDeclineHipFracture2005; @sakamotoRegionalVariationHip2018]. Post-fracture functional recovery is strongly influenced by timely and intensive rehabilitation [@magazinerHipFractureOutcomes2000; @langstonRehabilitationAfterHip1996], and clinical guidelines universally recommend early mobilization and multidisciplinary rehabilitation programs following hip fracture surgery.
+
+Japan's National Health Insurance system covers five categories of inpatient rehabilitation (H000–H004 under the medical fee schedule): cardiac and vascular, cerebrovascular, disuse syndrome, musculoskeletal, and pulmonary rehabilitation. Despite universal coverage, substantial regional disparities exist in the provision of rehabilitation services, both in volume and quality [@iharaRehabilitationRegionalVariation2020]. Prior research has documented geographic variation in healthcare utilization generally [@fukudaRegionalVariationMedical2016; @toyabeInequalityHospitalDistribution2009], but the ecological association between rehabilitation provision and fracture-related outcomes at the prefecture level has not been formally assessed.
+
+We hypothesized (H1) that prefectures with higher rehabilitation claim rates would show lower hip fracture surgery rates—reflecting a preventive benefit of rehabilitation on fall prevention and physical function—and (H2) that disuse-syndrome rehabilitation (H002) would specifically show this inverse association, given its direct clinical relevance to fracture recovery and secondary prevention. We tested these hypotheses using NDB Open Data No.10 (FY2023), the largest claims-based dataset available for ecological analysis in Japan.
+
+---
+
+# Methods
+
+## Study Design and Setting
+
+Cross-sectional ecological study at the 47-prefecture level in Japan. The unit of analysis was the prefecture (N = 47). Data were drawn from NDB Open Data No.10, covering fee-for-service claims from April 2023 to March 2024 (FY2023), and the 2020 Population Census.
+
+## Exposure Variables
+
+Rehabilitation claim data were extracted from the NDB Open Data No.10 "H_リハビリテーション 都道府県別算定回数／単位数" (prefectural rehabilitation claim counts). Five rehabilitation categories were extracted:
+
+- **H000**: Cardiac and vascular rehabilitation
+- **H001**: Cerebrovascular and other neurological rehabilitation
+- **H002**: Disuse syndrome rehabilitation *(primary exposure of interest)*
+- **H003**: Musculoskeletal rehabilitation *(primary exposure of interest)*
+- **H004**: Pulmonary rehabilitation
+
+Three exposure variables were defined: (1) rehabilitation total claim rate (sum of H000–H004 per 100,000 population), (2) H002 claim rate (disuse syndrome, per 100,000), and (3) H003 claim rate (musculoskeletal, per 100,000).
+
+## Outcome Variables
+
+Hip fracture surgery rates were derived from NDB Open Data No.10 surgical procedure data, extracted in a prior study (NDB_XXX_slope_fracture). Femoral fracture surgery procedures included: K044 (bone fragment removal), K045 (internal fixation), K046 (closed reduction with internal fixation), K081 (femoral head replacement: hemiarthroplasty), and K082 (total hip arthroplasty: THA). Primary outcome was the aggregate hip fracture surgery rate per 100,000 total population. Secondary outcomes included THA-specific (K082) and hemiarthroplasty-specific (K081) rates.
+
+## Covariates
+
+Two a priori confounders were included: (1) aging rate (proportion aged ≥65 years, 2020 Census) and (2) population density (persons per km², 2020 Census). Aging rate is the strongest predictor of both rehabilitation utilization and fracture incidence, and population density captures healthcare access and urbanicity.
+
+## Statistical Analysis
+
+**Descriptive statistics:** Means, standard deviations, and ranges were calculated for all variables.
+
+**Correlation analysis:** Pearson correlation coefficients (r) between key variable pairs were calculated.
+
+**Primary regression:** Ordinary least squares (OLS) regression of each outcome on each exposure, adjusting for aging rate and population density (Spec1 baseline).
+
+**Sensitivity analyses (six pre-specified specifications):**
+
+| Specification | Description |
+|---|---|
+| Spec1 | Baseline OLS (aging_rate + pop_density) |
+| Spec2 | HC3 heteroskedasticity-robust standard errors [@whiteHeteroskedasticityConsistentCovariance1980] |
+| Spec3 | Outlier exclusion (residuals ±3 IQR) |
+| Spec4 | Metropolitan exclusion (Tokyo, Osaka, Aichi, Kanagawa, Saitama, Chiba; N = 41) |
+| Spec5 | Log-transformed exposure and outcome |
+| Spec6 | Aging rate only as covariate |
+
+**Variance inflation factors (VIF)** were calculated for all models. All VIF values were < 2.0, indicating no multicollinearity.
+
+**Spatial autocorrelation:** Global Moran's I was calculated for rehabilitation total rate and hip fracture rate using the Queen contiguity spatial weight matrix (libpysal; transformed to row-standardized) [@moranNotesStatisticalAnalysis1950; @anselin1988spatial]. Statistical significance was assessed by 999-permutation conditional randomization.
+
+All analyses were performed in Python 3.14 using pandas, statsmodels, scipy, geopandas, libpysal, and esda. Statistical significance was defined as p < 0.05 (two-sided). Confidence intervals are 95%.
+
+---
+
+# Results
+
+## Descriptive Statistics
+
+**Table 1** summarizes the key variables across 47 prefectures.
+
+| Variable | Mean (SD) | Min | Max |
+|---|---|---|---|
+| Rehab total rate (per 100,000) | 88,389 (35,945) | 27,183 | 183,490 |
+| H002 rate (per 100,000) | 73,892 (30,905) | 22,472 | 158,473 |
+| H003 rate (per 100,000) | 278 (299) | 0 | 1,401 |
+| Hip fracture rate (per 100,000) | 254.0 (37.6) | 167.6 | 329.6 |
+| THA rate (per 100,000) | 70.1 (11.4) | 41.0 | 91.0 |
+| Aging rate (%) | 30.7 (3.1) | 22.6 | 36.4 |
+| Population density (per km²) | 657 (1,223) | 62.6 | 6,403 |
+
+Rehabilitation total claim rates showed a 6.8-fold variation across prefectures (Iwate 27,183 to Kagoshima 183,490 per 100,000). The five prefectures with the highest rehabilitation rates—Kagoshima, Saga, Kochi, Oita, and Fukuoka—were all located in Kyushu and Shikoku regions. The five prefectures with the lowest rates—Iwate, Akita, Fukushima, Niigata, and Aomori—were concentrated in the Tohoku region. Hip fracture surgery rates varied 1.97-fold (Iwate 167.6 to Akita 329.6 per 100,000).
+
+## Correlation Analysis
+
+Pearson correlations among key variables are shown in **Figure 7**. Rehabilitation total rate was positively correlated with hip fracture rate (r = 0.447, p = 0.002). Aging rate was positively correlated with hip fracture rate (r = 0.533, p < 0.001) but not with rehabilitation total rate (r = −0.054, p = 0.717), indicating that aging rate does not explain the positive rehabilitation-fracture correlation. H002 (disuse syndrome) rate was correlated with hip fracture rate (r = 0.344, p = 0.018), as was H003 (musculoskeletal) rate (r = 0.345, p = 0.018).
+
+## Spatial Autocorrelation
+
+Both rehabilitation total rate (Moran's I = 0.547, p = 0.001) and hip fracture rate (I = 0.563, p = 0.001) exhibited strong positive spatial autocorrelation, indicating significant geographic clustering beyond what would be expected by chance. Note: Two prefectures (Okinawa and Kyoto in the GeoJSON) were identified as spatial islands (no shared boundary in the Queen contiguity matrix); results were robust to their exclusion.
+
+## Regression Analysis
+
+### Primary Outcome: Hip Fracture Surgery Rate
+
+**Figure 3** illustrates the scatter relationship between rehabilitation total rate and hip fracture rate. In the adjusted OLS baseline model (Spec1), rehabilitation total rate was positively associated with hip fracture surgery rate (β = 0.0005; 95% CI, 0.0003–0.0007; p < 0.001; adjusted R² = 0.477). This finding was robust across all six sensitivity specifications (**Figure 6**; 6/6 significant).
+
+Similarly, H002 (disuse syndrome rehabilitation) rate was positively associated with hip fracture rate (Spec1: β = 0.0005; 95% CI, 0.0003–0.0008; p < 0.001; 6/6 specifications significant), and H003 (musculoskeletal rehabilitation) rate was positively associated (Spec1: β = 0.040; 95% CI, 0.010–0.071; p = 0.010; 6/6 specifications significant).
+
+### Secondary Outcome: THA Rate
+
+No significant associations were observed between any rehabilitation exposure and THA-specific rate across sensitivity specifications (rehab_total_rate → THA: Spec1 β = 0.0001, p = 0.145; 0/6 specifications significant).
+
+### Summary of Sensitivity Analysis
+
+| Exposure | Outcome | n | β (Spec1) | 95% CI | p (Spec1) | Sig specs |
+|---|---|---|---|---|---|---|
+| Rehab total rate | Hip fracture rate | 47 | 0.0005 | 0.0003–0.0007 | <0.001 | 6/6 |
+| Rehab total rate | THA rate | 47 | 0.0001 | −0.0000–0.0002 | 0.145 | 0/6 |
+| H002 rate | Hip fracture rate | 47 | 0.0005 | 0.0003–0.0008 | <0.001 | 6/6 |
+| H002 rate | THA rate | 47 | 0.0001 | −0.0001–0.0002 | 0.214 | 0/6 |
+| H003 rate | Hip fracture rate | 47 | 0.040 | 0.010–0.071 | 0.010 | 6/6 |
+| H003 rate | THA rate | 47 | — | — | — | — |
+
+---
+
+# Discussion
+
+## Principal Findings
+
+Contrary to our a priori hypotheses, rehabilitation provision at the prefectural level was consistently and robustly *positively* associated with hip fracture surgery rates. This positive association—observed across all three rehabilitation exposures and six sensitivity specifications—was unexpected and demands careful ecological interpretation.
+
+## Interpretation: Why a Positive Association?
+
+Several mechanisms may explain the positive direction of the association.
+
+**Supply-induced demand.** The most parsimonious explanation is supply-induced demand: regions with abundant rehabilitation infrastructure also have greater orthopedic surgical capacity and diagnostic sensitivity, leading to higher observed fracture surgery rates [@rooneySupplyInducedDemand2019]. Kagoshima and Saga prefectures—with the highest rehabilitation rates—are historically high-utilization regions for fee-for-service claims generally, which may inflate both the numerator (rehabilitation claims) and the denominator-related capture of surgical procedures. This ecological correlation does not imply that rehabilitation *causes* fractures.
+
+**Reverse causality.** A plausible causal mechanism runs in the opposite direction: prefectures with higher fracture burdens generate greater demand for post-fracture rehabilitation services. Rehabilitation supply responds to local clinical need over time, creating a positive cross-sectional correlation. The cross-sectional ecological design cannot distinguish this from a preventive relationship.
+
+**Unmeasured case-mix confounding.** Prefectural-level aggregation masks individual-level case mix. Regions with higher rehabilitation rates may serve more complex or severe cases (e.g., multi-morbid patients, those with prior stroke or disuse syndrome) whose fracture risk is intrinsically higher. NDB Open Data lacks individual-level data to adjust for case-mix severity.
+
+**Geographic confounding by Kyushu-Tohoku gradient.** The strong spatial autocorrelation (Moran's I > 0.55 for both variables) indicates that rehabilitation and fracture rates are geographically clustered—Kyushu/Shikoku high, Tohoku low. This spatial clustering may reflect unmeasured regional characteristics (dietary habits, climate, healthcare organization model, historical fee-setting norms) that simultaneously influence both variables but are not captured by aging rate and population density alone.
+
+**Aging rate as partial confounder.** Notably, aging rate was not correlated with rehabilitation total rate (r = −0.054), which is unexpected given that older populations should generate more rehabilitation demand. This may suggest that rehabilitation capacity was built historically in regions with younger aging curves, or that capacity constraints limit claims in high-aging areas such as Tohoku.
+
+## Comparison with Prior Literature
+
+Prior clinical studies consistently demonstrate that intensive rehabilitation reduces post-fracture disability and mortality [@magazinerHipFractureOutcomes2000; @sherringtonExercisePreventsHip2008]. However, these individual-level findings cannot be directly translated to ecological correlations. The ecological fallacy—attributing individual-level relationships to aggregate data—is a fundamental limitation of any ecological study [@riceEcologicalStudiesLimitations1994]. Our positive ecological correlation is not inconsistent with individual-level benefits of rehabilitation; the two operate at different levels of analysis.
+
+Geographic variation in rehabilitation use in Japan has been documented [@iharaRehabilitationRegionalVariation2020], and the 6.8-fold range in rehabilitation total rates observed in this study underscores the profound regional disparities that persist under universal coverage.
+
+## Limitations
+
+First, the ecological design precludes individual-level inference. Results should not be interpreted as indicating that rehabilitation *harms* individuals with hip fracture.
+
+Second, NDB Open Data No.10 is cross-sectional (FY2023), preventing assessment of temporal precedence. The direction of causality cannot be determined.
+
+Third, spatial autocorrelation in both variables (Moran's I > 0.55) violates the independence assumption of OLS. Spatial lag or spatial error models would be more appropriate for inference, and coefficient estimates from standard OLS may be biased. Future analyses should apply spatial econometric models.
+
+Fourth, fracture surgery rates are a proxy for fracture incidence; procedural variation in surgical decision-making (e.g., preference for conservative management in some regions) could independently affect rates.
+
+Fifth, unmeasured confounders—including per-capita orthopedic surgeon density, hospital bed count, urbanicity beyond population density, and socioeconomic indices—may explain part of the observed association.
+
+## Conclusions
+
+Rehabilitation provision rates were robustly and positively associated with hip fracture surgery rates at the prefectural level in Japan, contrary to the hypothesis of an inverse relationship. This finding most likely reflects supply-induced demand, reverse causality, or geographic confounding rather than any adverse effect of rehabilitation. The 6.8-fold variation in rehabilitation claim rates across prefectures documents profound regional disparities in rehabilitation access that warrant policy attention. Future research should employ spatial regression methods, longitudinal designs, and individual-level data to disentangle these ecological associations.
+
+---
+
+# Declarations
+
+## Ethics Statement
+
+This study used anonymized, publicly available, aggregated NDB Open Data (no individual-level data). Ethical approval was not required.
+
+## Data Availability
+
+NDB Open Data No.10 is publicly available at: https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html
+
+Analysis scripts are available at: [GitHub repository URL upon acceptance]
+
+## Competing Interests
+
+The authors declare no competing interests.
+
+## Funding
+
+Not applicable.
+
+## Authors' Contributions
+
+[Author 1]: Conceptualization, data curation, formal analysis, visualization, writing — original draft. [Author 2]: Methodology review, writing — review & editing.
+
+---
+
+# References
+
+::: {#refs}
+:::
+
+---
+
+# Figure Captions
+
+**Figure 1.** Choropleth map of prefectural rehabilitation total claim rates (per 100,000 population), Japan FY2023. Higher rates (darker colors) are concentrated in Kyushu and Shikoku regions; lower rates in Tohoku.
+
+**Figure 2.** Choropleth map of prefectural hip fracture surgery rates (per 100,000 population), Japan FY2023.
+
+**Figure 3.** Scatter plot of rehabilitation total claim rate versus hip fracture surgery rate by prefecture (N = 47). Regression line shown with 95% confidence band. Pearson r = 0.447, p = 0.002.
+
+**Figure 4.** Scatter plot of disuse-syndrome rehabilitation rate (H002) versus hip fracture surgery rate by prefecture (N = 47). Pearson r = 0.344, p = 0.018.
+
+**Figure 5.** Scatter plot of musculoskeletal rehabilitation rate (H003) versus hip fracture surgery rate by prefecture (N = 47). Pearson r = 0.345, p = 0.018.
+
+**Figure 6.** Forest plot of six sensitivity analyses for the primary exposure (rehabilitation total rate) and outcome (hip fracture surgery rate). Red markers indicate p < 0.05; all six specifications are statistically significant.
+
+**Figure 7.** Correlation heatmap among key variables (N = 47 prefectures). Cell values are Pearson correlation coefficients.

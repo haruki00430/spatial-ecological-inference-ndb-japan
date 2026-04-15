@@ -1,7 +1,21 @@
 """
-Phase 1: リハビリテーションデータ抽出
-NDB Open Data No.10「H_リハビリテーション」から都道府県別の算定回数を抽出する。
-対象: H000（心大血管）, H001（脳血管）, H003（呼吸器）, H004（廃用症候群）
+Phase 1: リハビリテーションデータ抽出（ワイド形式対応版）
+NDB Open Data No.10「H_リハビリテーション 都道府県別算定回数／単位数.xlsx」から
+都道府県別・リハビリ種別の算定回数を抽出する。
+
+Excel構造:
+  行0: 説明文（長テキスト）
+  行1: NaN
+  行2: カラムヘッダ（行コード, 項目名称, 診療コード, 診療科, 点数, 合計, 01, 02, ...）
+  行3: 都道府県名（NaN, NaN, NaN, NaN, NaN, NaN, 北海道, 青森県, ...）
+  行4+: データ（H000〜H008の各行、複数行で1コード、列0はffill要）
+
+NDBコード（実際の意味）:
+  H000: 心大血管疾患リハビリテーション料
+  H001: 脳血管疾患等リハビリテーション料
+  H002: 廃用症候群リハビリテーション料  <- 骨折後廃用予防に最重要
+  H003: 運動器リハビリテーション料      <- 整形外科・骨折に直接関連
+  H004: 呼吸器リハビリテーション料
 
 出力: 02_Data/interim/rehabilitation_prefecture.csv
 """
@@ -18,7 +32,9 @@ sys.path.append(os.path.join(PROJECT_ROOT, "src"))
 from ndb_library.utils import clean_numeric
 from ndb_library.logger import setup_logger
 
-logger = setup_logger(__name__, log_file=os.path.join(PROJECT_DIR, "03_Analysis", "analysis", "logs", "phase1_extract.log"))
+LOG_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "analysis", "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+logger = setup_logger(__name__, log_file=os.path.join(LOG_DIR, "phase1_extract.log"))
 
 with open(os.path.join(PROJECT_DIR, "config", "config.yaml"), "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
@@ -28,131 +44,122 @@ OUTPUT_DIR = os.path.join(PROJECT_DIR, config["output"]["interim_dir"])
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ========================================
-# Step 1: Excelファイル読み込み
+# Step 1: Excelファイル読み込み（ヘッダなし）
 # ========================================
 rehab_path = os.path.join(NDB_ROOT, config["data_sources"]["rehabilitation"]["path"])
 logger.info(f"リハビリExcelを読み込みます: {rehab_path}")
 
 df_raw = pd.read_excel(rehab_path, header=None)
 logger.info(f"生データサイズ: {df_raw.shape}")
-logger.info(f"先頭5行（カラム確認用）:\n{df_raw.iloc[:5, :8].to_string()}")
 
 # ========================================
-# Step 2: データ開始行の特定
+# Step 2: Excel構造の確認と都道府県列マッピング構築
 # ========================================
-data_start_row = None
-for i, row in df_raw.iterrows():
-    row_str = " ".join([str(v) for v in row.values if pd.notna(v)])
-    if "全国" in row_str or "北海道" in row_str:
-        data_start_row = i
-        break
+# 行3に都道府県名が入っている
+PREF_ROW_IDX = 3
+pref_row = df_raw.iloc[PREF_ROW_IDX]
 
-if data_start_row is None:
-    logger.error("データ開始行が特定できませんでした")
-    raise ValueError("データ開始行が特定できませんでした")
+# 列6以降が都道府県（47都道府県）
+PREF_START_COL = 6
+pref_mapping = {}  # {col_index: 都道府県名}
+for col_idx in range(PREF_START_COL, df_raw.shape[1]):
+    pref_name = pref_row.iloc[col_idx]
+    if pd.notna(pref_name) and str(pref_name).strip():
+        pref_mapping[col_idx] = str(pref_name).strip()
 
-logger.info(f"データ開始行: {data_start_row}")
-header_rows = list(range(data_start_row))
+logger.info(f"都道府県列マッピング: {len(pref_mapping)}都道府県")
+logger.info(f"最初の5都道府県: {list(pref_mapping.items())[:5]}")
+logger.info(f"最後の5都道府県: {list(pref_mapping.items())[-5:]}")
 
-df = pd.read_excel(rehab_path, header=header_rows)
-logger.info(f"ヘッダー付きデータ: {df.shape}")
-
-# カラム名の確認（上位30列）
-logger.info("カラム名（上位30列）:")
-for i, col in enumerate(df.columns[:30]):
-    logger.info(f"  列{i}: {col}")
+assert len(pref_mapping) == 47, f"都道府県数が47でない: {len(pref_mapping)}"
 
 # ========================================
-# Step 3: 都道府県行の抽出
+# Step 3: データ行の抽出（行4以降）
 # ========================================
-PREFECTURE_LIST = [
-    "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
-    "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
-    "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県",
-    "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県",
-    "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県",
-    "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県",
-    "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
-]
+DATA_START_ROW = 4
+df_data = df_raw.iloc[DATA_START_ROW:].copy().reset_index(drop=True)
+logger.info(f"データ行数: {len(df_data)}")
 
-pref_col = df.columns[0]
-df_pref = df[df[pref_col].astype(str).isin(PREFECTURE_LIST)].copy()
-logger.info(f"都道府県行数: {len(df_pref)}")
-
-df_pref = clean_numeric(df_pref)
+# 列0（H-code）の前方補完
+logger.info(f"列0（H-code）の全値: {df_data.iloc[:, 0].tolist()}")
+df_data.iloc[:, 0] = df_data.iloc[:, 0].ffill()
 
 # ========================================
-# Step 4: リハビリコード別に「合計」列を特定
+# Step 4: ターゲットコード別に都道府県合計を集計
 # ========================================
-# H000, H001, H003, H004 の「計」（男女合計）算定回数列を取得
-REHAB_CODES = ["H000", "H001", "H003", "H004"]
+# H002=廃用症候群、H003=運動器 が骨折アウトカムとの関連で最重要
+TARGET_CODES = ["H000", "H001", "H002", "H003", "H004"]
 
-def find_code_total_col(df, code):
-    """指定コードの「計」列を探す"""
-    candidates = [c for c in df.columns if code in str(c)]
-    if not candidates:
-        return None
-    # 「計」を含む列を優先
-    total_cols = [c for c in candidates if "計" in str(c)]
-    return total_cols[0] if total_cols else candidates[0]
+results = []
+for code in TARGET_CODES:
+    # 完全一致のみ（H003-2等のサブコードは除外）
+    mask = df_data.iloc[:, 0].astype(str) == code
+    df_code = df_data[mask]
+    logger.info(f"{code}: {len(df_code)}行")
 
-code_cols = {}
-for code in REHAB_CODES:
-    col = find_code_total_col(df, code)
-    code_cols[code] = col
-    logger.info(f"{code}: 使用列 = {col}")
+    if len(df_code) == 0:
+        logger.warning(f"{code} の行が見つかりませんでした")
+        continue
 
-# ========================================
-# Step 5: 出力データセット構築
-# ========================================
-df_out = pd.DataFrame()
-df_out["prefecture"] = df_pref[pref_col].values
+    for col_idx, pref_name in pref_mapping.items():
+        col_vals = pd.to_numeric(df_data.loc[mask, col_idx], errors="coerce")
+        total = col_vals.sum()
+        results.append({
+            "prefecture": pref_name,
+            "code": code,
+            "count": total
+        })
 
-for code, col in code_cols.items():
-    col_name = f"{code.lower()}_count"
-    if col:
-        df_out[col_name] = pd.to_numeric(df_pref[col].values, errors="coerce")
-    else:
-        logger.warning(f"{code} の列が見つかりませんでした")
-        df_out[col_name] = np.nan
+df_long = pd.DataFrame(results)
+logger.info(f"集計後行数: {len(df_long)}")
+
+# ピボット: prefecture × code
+df_pivot = df_long.pivot(index="prefecture", columns="code", values="count").reset_index()
+df_pivot.columns.name = None
+
+col_rename = {
+    "H000": "h000_count",
+    "H001": "h001_count",
+    "H002": "h002_count",
+    "H003": "h003_count",
+    "H004": "h004_count",
+}
+df_pivot = df_pivot.rename(columns=col_rename)
+logger.info(f"ピボット後カラム: {df_pivot.columns.tolist()}")
 
 # 総リハビリ算定回数
-available_code_cols = [f"{c.lower()}_count" for c in REHAB_CODES if code_cols.get(c)]
-if available_code_cols:
-    df_out["rehab_total_count"] = df_out[available_code_cols].sum(axis=1)
+available_codes = [c for c in col_rename.values() if c in df_pivot.columns]
+df_pivot["rehab_total_count"] = df_pivot[available_codes].sum(axis=1)
+
+logger.info(f"\n記述統計（算定回数）:\n{df_pivot[available_codes + ['rehab_total_count']].describe().to_string()}")
 
 # ========================================
-# Step 6: 人口データ結合 → 算定率算出
+# Step 5: 人口データ結合 → 算定率算出
 # ========================================
 pop_path = config["data_sources"]["population_stats"]["path"]
 logger.info(f"人口データ読み込み: {pop_path}")
 df_pop = pd.read_csv(pop_path, encoding="utf-8")
 logger.info(f"人口データカラム: {df_pop.columns.tolist()}")
 
-# 都道府県名の統一（既存データは英語カラム名の可能性あり）
-if "prefecture" not in df_pop.columns:
-    # 最初の列を都道府県名として使用
-    df_pop = df_pop.rename(columns={df_pop.columns[0]: "prefecture"})
-
-df_merged = pd.merge(df_out, df_pop[["prefecture", "total_pop", "aging_rate", "pop_density"]],
+df_merged = pd.merge(df_pivot, df_pop[["prefecture", "total_pop", "aging_rate", "pop_density"]],
                      on="prefecture", how="left")
-logger.info(f"結合後: {len(df_merged)}行")
+logger.info(f"結合後: {len(df_merged)}行, 欠損値:\n{df_merged.isna().sum()}")
 
 # 算定率（/人口10万人）
-for code in REHAB_CODES:
-    col = f"{code.lower()}_count"
-    rate_col = f"{code.lower()}_rate"
-    df_merged[rate_col] = df_merged[col] / df_merged["total_pop"] * 100000
+for code_col in available_codes + ["rehab_total_count"]:
+    rate_col = code_col.replace("_count", "_rate")
+    df_merged[rate_col] = df_merged[code_col] / df_merged["total_pop"] * 100_000
 
-df_merged["rehab_total_rate"] = df_merged["rehab_total_count"] / df_merged["total_pop"] * 100000
-
-logger.info(f"リハビリ総算定率（/10万人）基本統計:\n{df_merged['rehab_total_rate'].describe()}")
-logger.info(f"欠損値:\n{df_merged.isna().sum()}")
+rate_cols = [c.replace("_count", "_rate") for c in available_codes] + ["rehab_total_rate"]
+logger.info(f"\nリハビリ算定率（/10万人）基本統計:\n{df_merged[rate_cols].describe().to_string()}")
 
 # ========================================
-# Step 7: 保存
+# Step 6: 保存
 # ========================================
 output_path = os.path.join(OUTPUT_DIR, config["output"]["files"]["rehabilitation_data"])
 df_merged.to_csv(output_path, index=False, encoding="utf-8")
-logger.info(f"リハビリデータ保存: {output_path} ({len(df_merged)}行)")
+logger.info(f"リハビリデータ保存完了: {output_path} ({len(df_merged)}行)")
+
+logger.info(f"\nリハビリ総算定率（上位5）:\n{df_merged.nlargest(5, 'rehab_total_rate')[['prefecture', 'rehab_total_rate']].to_string()}")
+logger.info(f"\nリハビリ総算定率（下位5）:\n{df_merged.nsmallest(5, 'rehab_total_rate')[['prefecture', 'rehab_total_rate']].to_string()}")
 logger.info("Phase 1 完了")

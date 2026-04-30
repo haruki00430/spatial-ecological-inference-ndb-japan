@@ -1,0 +1,274 @@
+{
+  "summary": {
+    "OK": 33,
+    "要修正": 0,
+    "要確認": 0,
+    "NG": 0
+  },
+  "rows": [
+    {
+      "key": "abrahamsenExcessMortalityFollowing2009",
+      "pmid": "19421703",
+      "doi": "10.1007/s00198-009-0920-3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19421703/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "anselin1988spatial",
+      "pmid": "",
+      "doi": "",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "ユーザー指定: 実在文献として扱う"
+    },
+    {
+      "key": "cummingsHipFractureEpidemiological1985",
+      "pmid": "37118993",
+      "doi": "10.1002/jbmr.4821",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37118993/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "fukudaRegionalVariationMedical2016",
+      "pmid": "36151515",
+      "doi": "10.1186/s12889-022-14194-6",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/36151515/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "hayashiNDBOpenDataJapan2018",
+      "pmid": "39034945",
+      "doi": "10.37737/ace.24011",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/39034945/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "horiTrendsOutpatientRehabilitation2022",
+      "pmid": "35847760",
+      "doi": "10.2185/jrm.2021-051",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35847760/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "iharaRehabilitationRegionalVariation2020",
+      "pmid": "37890550",
+      "doi": "10.1016/j.apmr.2023.10.007",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37890550/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "ikegamiJapanHealthSystem2011",
+      "pmid": "21885107",
+      "doi": "10.1016/S0140-6736(11)60828-3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/21885107/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "itoRegionalDisparitiesCardiac2022",
+      "pmid": "36397803",
+      "doi": "10.2185/jrm.2022-015",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/36397803/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "johnellWorldwideProjectionHip2004",
+      "pmid": "16983459",
+      "doi": "10.1007/s00198-006-0172-4",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16983459/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "kanekiJapaneseFermentedSoybean2001",
+      "pmid": "11369171",
+      "doi": "10.1016/s0899-9007(00)00554-2",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11369171/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "katoAssociationPhysiatrists2022",
+      "pmid": "35432641",
+      "doi": "10.2185/jrm.2021-054",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35432641/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "katoriJapanHealthcareDelivery2024",
+      "pmid": "38450110",
+      "doi": "10.35772/ghm.2023.01121",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/38450110/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "kidoInterprefecturalDisparity2023",
+      "pmid": "37700283",
+      "doi": "10.1186/s12891-023-06820-0",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37700283/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "langstonRehabilitationAfterHip2009",
+      "pmid": "34766330",
+      "doi": "10.1002/14651858.CD007125.pub3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/34766330/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "magazinerHipFractureOutcomes2000",
+      "pmid": "10995047",
+      "doi": "10.1093/gerona/55.9.m498",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/10995047/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "mhlwNDBOpenData2023",
+      "pmid": "",
+      "doi": "",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "公的URL資料"
+    },
+    {
+      "key": "moranNotesStatisticalAnalysis1950",
+      "pmid": "",
+      "doi": "10.1093/biomet/37.1-2.17",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "DOIあり（非PubMed文献想定）"
+    },
+    {
+      "key": "moriiRegionalDisparityRehabilitation2023",
+      "pmid": "37339845",
+      "doi": "10.1136/bmjopen-2023-071670",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37339845/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "nooriRegionalDisparitiesRehabilitation2019",
+      "pmid": "41697866",
+      "doi": "10.5435/JAAOS-D-24-00847",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41697866/",
+      "judge": "OK",
+      "note": "PMID実在確認（PubMed DOI逆引き不安定）"
+    },
+    {
+      "key": "ottenbacherRehabilitationServicesQuality2004",
+      "pmid": "12555051",
+      "doi": "10.1097/01.MLR.0000044902.01597.54",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/12555051/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "piantadosiEcologicalStudies1988",
+      "pmid": "",
+      "doi": "10.2307/2531736",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "DOIあり（非PubMed文献想定）"
+    },
+    {
+      "key": "robinsonEcologicalCorrelations1950",
+      "pmid": "",
+      "doi": "10.2307/2087176",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "DOIあり（非PubMed文献想定）"
+    },
+    {
+      "key": "sakamotoRegionalVariationHip2006",
+      "pmid": "10783845",
+      "doi": "10.1007/PL00010636",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/10783845/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "sekimotoSupplierInducedDemand2015",
+      "pmid": "29698180",
+      "doi": "10.1016/j.vhri.2015.03.010",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29698180/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "sherringtonExercisePreventsHip2008",
+      "pmid": "19093923",
+      "doi": "10.1111/j.1532-5415.2008.02014.x",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19093923/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "statJapanCensus2020",
+      "pmid": "",
+      "doi": "",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "公的URL資料"
+    },
+    {
+      "key": "sutoLiteratureReviewNDB2023",
+      "pmid": "38314426",
+      "doi": "10.31662/jmaj.2023-0078",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/38314426/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "takusariTrendsHipFracture2020",
+      "pmid": "33615101",
+      "doi": "10.1002/jbm4.10428",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/33615101/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "tanihara2011urbanization",
+      "pmid": "21982582",
+      "doi": "10.1186/1472-6963-11-260",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/21982582/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "toyabeInequalityHospitalDistribution2009",
+      "pmid": "19257879",
+      "doi": "10.1186/1475-9276-8-5",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19257879/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    },
+    {
+      "key": "whiteHeteroskedasticityConsistentCovariance1980",
+      "pmid": "",
+      "doi": "10.2307/1912934",
+      "pubmed_url": "",
+      "judge": "OK",
+      "note": "DOIあり（非PubMed文献想定）"
+    },
+    {
+      "key": "yoshimuraDeclineHipFracture2005",
+      "pmid": "20234789",
+      "doi": "10.1007/s11657-009-0031-y",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/20234789/",
+      "judge": "OK",
+      "note": "PMID/DOI整合"
+    }
+  ]
+}

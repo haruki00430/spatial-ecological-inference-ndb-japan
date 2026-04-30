@@ -42,6 +42,21 @@ logger = setup_logger(__name__, log_file=os.path.join(LOG_DIR, "phase5_visualiza
 FIGURES_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "results", "figures")
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
+PREF_EN = {
+    "北海道": "Hokkaido", "青森県": "Aomori", "岩手県": "Iwate", "宮城県": "Miyagi",
+    "秋田県": "Akita", "山形県": "Yamagata", "福島県": "Fukushima", "茨城県": "Ibaraki",
+    "栃木県": "Tochigi", "群馬県": "Gunma", "埼玉県": "Saitama", "千葉県": "Chiba",
+    "東京都": "Tokyo", "神奈川県": "Kanagawa", "新潟県": "Niigata", "富山県": "Toyama",
+    "石川県": "Ishikawa", "福井県": "Fukui", "山梨県": "Yamanashi", "長野県": "Nagano",
+    "岐阜県": "Gifu", "静岡県": "Shizuoka", "愛知県": "Aichi", "三重県": "Mie",
+    "滋賀県": "Shiga", "京都府": "Kyoto", "大阪府": "Osaka", "兵庫県": "Hyogo",
+    "奈良県": "Nara", "和歌山県": "Wakayama", "鳥取県": "Tottori", "島根県": "Shimane",
+    "岡山県": "Okayama", "広島県": "Hiroshima", "山口県": "Yamaguchi", "徳島県": "Tokushima",
+    "香川県": "Kagawa", "愛媛県": "Ehime", "高知県": "Kochi", "福岡県": "Fukuoka",
+    "佐賀県": "Saga", "長崎県": "Nagasaki", "熊本県": "Kumamoto", "大分県": "Oita",
+    "宮崎県": "Miyazaki", "鹿児島県": "Kagoshima", "沖縄県": "Okinawa",
+}
+
 # ======================================================
 # データ読み込み
 # ======================================================
@@ -72,16 +87,16 @@ def fig1_choropleth_rehab():
         legend=True,
         cmap="YlOrRd",
         legend_kwds={
-            "label": "リハビリ総算定率（回/10万人）",
+            "label": "Total Rehabilitation Claim Rate (per 100,000)",
             "orientation": "horizontal",
             "shrink": 0.7,
             "pad": 0.02,
         },
         edgecolor="white",
         linewidth=0.3,
-        missing_kwds={"color": "lightgrey", "label": "データなし"},
+        missing_kwds={"color": "lightgrey", "label": "No data"},
     )
-    ax.set_title("都道府県別リハビリテーション総算定率\n（NDB Open Data No.10, FY2023）",
+    ax.set_title("Prefectural Total Rehabilitation Claim Rate\n(NDB Open Data No.10, FY2023)",
                  fontsize=13, pad=12)
     ax.axis("off")
     out = os.path.join(FIGURES_DIR, "fig1_choropleth_rehab_rate.png")
@@ -101,16 +116,16 @@ def fig2_choropleth_fracture():
         legend=True,
         cmap="Blues",
         legend_kwds={
-            "label": "大腿骨骨折手術率（件/10万人）",
+            "label": "Hip Fracture Surgery Rate (per 100,000)",
             "orientation": "horizontal",
             "shrink": 0.7,
             "pad": 0.02,
         },
         edgecolor="white",
         linewidth=0.3,
-        missing_kwds={"color": "lightgrey", "label": "データなし"},
+        missing_kwds={"color": "lightgrey", "label": "No data"},
     )
-    ax.set_title("都道府県別大腿骨骨折手術率\n（NDB Open Data No.10, FY2023）",
+    ax.set_title("Prefectural Hip Fracture Surgery Rate\n(NDB Open Data No.10, FY2023)",
                  fontsize=13, pad=12)
     ax.axis("off")
     out = os.path.join(FIGURES_DIR, "fig2_choropleth_fracture_rate.png")
@@ -131,22 +146,22 @@ def fig3_scatter_main():
     ax.scatter(x, y, color="#2166ac", alpha=0.7, edgecolors="white", s=60, zorder=3)
 
     x_line = np.linspace(x.min(), x.max(), 200)
-    ax.plot(x_line, slope * x_line + intercept, color="#d73027", lw=2, label=f"OLS回帰線 (r={r:.3f}, p={p:.4f})")
+    ax.plot(x_line, slope * x_line + intercept, color="#d73027", lw=2, label=f"OLS regression line (r={r:.3f}, p={p:.4f})")
 
     # Prefecture labels for outliers (top/bottom 5 by residual)
     residuals = y - (slope * x + intercept)
     label_mask = (residuals.abs() > residuals.abs().quantile(0.80))
     for i, row in df[label_mask].iterrows():
         ax.annotate(
-            row["prefecture"],
+            PREF_EN.get(row["prefecture"], row["prefecture"]),
             (row["rehab_total_rate"], row["hip_fracture_rate"]),
             fontsize=7, ha="left", va="bottom",
             xytext=(3, 3), textcoords="offset points",
         )
 
-    ax.set_xlabel("リハビリ総算定率（回/10万人）", fontsize=11)
-    ax.set_ylabel("大腿骨骨折手術率（件/10万人）", fontsize=11)
-    ax.set_title("リハビリ総算定率と大腿骨骨折手術率の関連\n（都道府県別、N=47）", fontsize=12)
+    ax.set_xlabel("Total Rehabilitation Claim Rate (per 100,000)", fontsize=11)
+    ax.set_ylabel("Hip Fracture Surgery Rate (per 100,000)", fontsize=11)
+    ax.set_title("Association between Total Rehabilitation Claim Rate\nand Hip Fracture Surgery Rate (Prefectures, N=47)", fontsize=12)
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
@@ -168,11 +183,11 @@ def fig4_scatter_h002():
     ax.scatter(x, y, color="#4dac26", alpha=0.7, edgecolors="white", s=60, zorder=3)
     x_line = np.linspace(x.min(), x.max(), 200)
     ax.plot(x_line, slope * x_line + intercept, color="#d73027", lw=2,
-            label=f"OLS回帰線 (r={r:.3f}, p={p:.4f})")
+            label=f"OLS regression line (r={r:.3f}, p={p:.4f})")
 
-    ax.set_xlabel("廃用症候群リハビリ算定率（H002, 回/10万人）", fontsize=11)
-    ax.set_ylabel("大腿骨骨折手術率（件/10万人）", fontsize=11)
-    ax.set_title("廃用症候群リハビリ算定率と大腿骨骨折手術率の関連\n（都道府県別、N=47）", fontsize=12)
+    ax.set_xlabel("Disuse Syndrome Rehabilitation Claim Rate (H002, per 100,000)", fontsize=11)
+    ax.set_ylabel("Hip Fracture Surgery Rate (per 100,000)", fontsize=11)
+    ax.set_title("Association between Disuse Syndrome Rehabilitation Rate (H002)\nand Hip Fracture Surgery Rate (Prefectures, N=47)", fontsize=12)
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
@@ -194,11 +209,11 @@ def fig5_scatter_h003():
     ax.scatter(x, y, color="#762a83", alpha=0.7, edgecolors="white", s=60, zorder=3)
     x_line = np.linspace(x.min(), x.max(), 200)
     ax.plot(x_line, slope * x_line + intercept, color="#d73027", lw=2,
-            label=f"OLS回帰線 (r={r:.3f}, p={p:.4f})")
+            label=f"OLS regression line (r={r:.3f}, p={p:.4f})")
 
-    ax.set_xlabel("運動器リハビリ算定率（H003, 回/10万人）", fontsize=11)
-    ax.set_ylabel("大腿骨骨折手術率（件/10万人）", fontsize=11)
-    ax.set_title("運動器リハビリ算定率と大腿骨骨折手術率の関連\n（都道府県別、N=47）", fontsize=12)
+    ax.set_xlabel("Musculoskeletal Rehabilitation Claim Rate (H003, per 100,000)", fontsize=11)
+    ax.set_ylabel("Hip Fracture Surgery Rate (per 100,000)", fontsize=11)
+    ax.set_title("Association between Musculoskeletal Rehabilitation Rate (H003)\nand Hip Fracture Surgery Rate (Prefectures, N=47)", fontsize=12)
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
@@ -221,12 +236,12 @@ def fig6_forest_plot():
     ].copy()
 
     spec_labels = {
-        "Spec1_Baseline": "Spec 1: Baseline OLS\n（aging_rate + pop_density 調整）",
+        "Spec1_Baseline": "Spec 1: Baseline OLS\n(adjusted for aging_rate + pop_density)",
         "Spec2_HC3": "Spec 2: HC3 Robust SE",
-        "Spec3_OutlierExcluded": "Spec 3: 外れ値除外（±3IQR）",
-        "Spec4_MetroExcluded": "Spec 4: 大都市圏除外\n（東京・大阪・愛知・神奈川・埼玉・千葉）",
-        "Spec5_LogTransformed": "Spec 5: 対数変換（log-log）",
-        "Spec6_AgingOnly": "Spec 6: aging_rate のみ調整",
+        "Spec3_OutlierExcluded": "Spec 3: Outlier Exclusion (±3 IQR)",
+        "Spec4_MetroExcluded": "Spec 4: Metropolitan Exclusion\n(Tokyo, Osaka, Aichi, Kanagawa, Saitama, Chiba)",
+        "Spec5_LogTransformed": "Spec 5: Log-Transformed (log-log)",
+        "Spec6_AgingOnly": "Spec 6: Aging Rate Only",
     }
 
     sub["label"] = sub["spec"].map(spec_labels)
@@ -255,9 +270,9 @@ def fig6_forest_plot():
     ax.axvline(0, color="black", lw=0.8, ls="--", alpha=0.6)
     ax.set_yticks(y_pos)
     ax.set_yticklabels(sub["label"], fontsize=9)
-    ax.set_xlabel("回帰係数 β（95% CI）", fontsize=11)
+    ax.set_xlabel("Regression Coefficient β (95% CI)", fontsize=11)
     ax.set_title(
-        "感度分析: リハビリ総算定率 → 大腿骨骨折手術率\n（6仕様、N=47都道府県）",
+        "Sensitivity Analysis: Total Rehabilitation Claim Rate → Hip Fracture Surgery Rate\n(6 specifications, N=47 prefectures)",
         fontsize=12
     )
 
@@ -284,10 +299,10 @@ def fig7_correlation_heatmap():
         "aging_rate", "pop_density",
     ]
     col_labels = [
-        "リハビリ総算定率", "廃用症候群リハビリ(H002)",
-        "運動器リハビリ(H003)",
-        "大腿骨骨折手術率", "THA手術率",
-        "高齢化率", "人口密度",
+        "Rehab total rate", "Disuse rehab (H002)",
+        "Musculoskeletal rehab (H003)",
+        "Hip fracture rate", "THA rate",
+        "Aging rate", "Population density",
     ]
     corr = df[cols].corr()
 
@@ -307,7 +322,7 @@ def fig7_correlation_heatmap():
         linewidths=0.5,
         annot_kws={"size": 8},
     )
-    ax.set_title("主要変数の相関行列\n（N=47都道府県）", fontsize=12, pad=12)
+    ax.set_title("Correlation Matrix of Key Variables\n(N=47 prefectures)", fontsize=12, pad=12)
     plt.xticks(rotation=40, ha="right", fontsize=8)
     plt.yticks(rotation=0, fontsize=8)
 

@@ -1,0 +1,302 @@
+{
+  "count": 33,
+  "rows": [
+    {
+      "key": "abrahamsenExcessMortalityFollowing2009",
+      "pmid": "19421703",
+      "doi": "10.1007/s00198-009-0920-3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19421703/",
+      "judge": "OK",
+      "bib_title": "Excess mortality following hip fracture: a systematic epidemiological review",
+      "pubmed_title": "Excess mortality following hip fracture: a systematic epidemiological review."
+    },
+    {
+      "key": "anselin1988spatial",
+      "pmid": "",
+      "doi": "",
+      "pubmed_url": "",
+      "judge": "要確認: PMID/DOI欠落",
+      "bib_title": "Spatial Econometrics: Methods and Models",
+      "pubmed_title": ""
+    },
+    {
+      "key": "cummingsHipFractureEpidemiological1985",
+      "pmid": "4025311",
+      "doi": "10.1093/oxfordjournals.aje.a114104",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4025311/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Epidemiology of hip fractures",
+      "pubmed_title": "Coffee consumption, benign breast disease, and breast cancer."
+    },
+    {
+      "key": "fukudaRegionalVariationMedical2016",
+      "pmid": "27238756",
+      "doi": "10.1016/j.healthpol.2016.05.004",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/27238756/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Regional variation in medical care consumption relating to end-of-life care in Japan",
+      "pubmed_title": "The (unusual) aspartic acid in the metal coordination sphere of the prokaryotic zinc finger domain."
+    },
+    {
+      "key": "hayashiNDBOpenDataJapan2018",
+      "pmid": "28978852",
+      "doi": "10.2188/jea.JE20170143",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28978852/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Current status and challenges of the National Database of Health Insurance Claims and Specific Health Checkups of Japan (NDB)",
+      "pubmed_title": "[New developments in treatment modalities of thrombotic thrombocytopenic purpura]."
+    },
+    {
+      "key": "horiTrendsOutpatientRehabilitation2022",
+      "pmid": "35847760",
+      "doi": "10.2185/jrm.2021-051",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35847760/",
+      "judge": "OK",
+      "bib_title": "Trends in outpatient rehabilitation practices in Japan: analysis using the National Database of Health Insurance Claims Open Data",
+      "pubmed_title": "Trends in outpatient rehabilitation practices in Japan: analysis using the National Database of Health Insurance Claims Open Data."
+    },
+    {
+      "key": "iharaRehabilitationRegionalVariation2020",
+      "pmid": "37890550",
+      "doi": "10.1016/j.apmr.2023.10.007",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37890550/",
+      "judge": "OK",
+      "bib_title": "Variation in Utilization of Postoperative Rehabilitation After Total Hip Arthroplasty in Japan",
+      "pubmed_title": "Variation in Utilization of Postoperative Rehabilitation After Total Hip Arthroplasty in Japan."
+    },
+    {
+      "key": "ikegamiJapanHealthSystem2011",
+      "pmid": "21885098",
+      "doi": "10.1016/S0140-6736(11)60828-3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/21885098/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Japan's Health System: containing costs and attempting reform",
+      "pubmed_title": "Cost containment and quality of care in Japan: is there a trade-off?"
+    },
+    {
+      "key": "itoRegionalDisparitiesCardiac2022",
+      "pmid": "36397803",
+      "doi": "10.2185/jrm.2022-015",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/36397803/",
+      "judge": "OK",
+      "bib_title": "Regional disparities in cardiac rehabilitation volume throughout Japan based on open data from a National Database of Health Insurance Claims",
+      "pubmed_title": "Regional disparities in cardiac rehabilitation volume throughout Japan based on open data from a National Database of Health Insurance Claims."
+    },
+    {
+      "key": "johnellWorldwideProjectionHip2004",
+      "pmid": "16983459",
+      "doi": "10.1007/s00198-006-0172-4",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16983459/",
+      "judge": "OK",
+      "bib_title": "An estimate of the worldwide prevalence and disability associated with osteoporotic fractures",
+      "pubmed_title": "An estimate of the worldwide prevalence and disability associated with osteoporotic fractures."
+    },
+    {
+      "key": "kanekiJapaneseFermentedSoybean2001",
+      "pmid": "11369171",
+      "doi": "10.1016/s0899-9007(00)00554-2",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11369171/",
+      "judge": "OK",
+      "bib_title": "Japanese fermented soybean food as the major determinant of the large geographic difference in circulating levels of vitamin K2: possible implications for hip-fracture risk",
+      "pubmed_title": "Japanese fermented soybean food as the major determinant of the large geographic difference in circulating levels of vitamin K2: possible implications for hip-fracture risk."
+    },
+    {
+      "key": "katoAssociationPhysiatrists2022",
+      "pmid": "35432641",
+      "doi": "10.2185/jrm.2021-054",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35432641/",
+      "judge": "OK",
+      "bib_title": "Association between the number of board-certified physiatrists and volume of rehabilitation provided in Japan: an ecological study",
+      "pubmed_title": "Association between the number of board-certified physiatrists and volume of rehabilitation provided in Japan: an ecological study."
+    },
+    {
+      "key": "katoriJapanHealthcareDelivery2024",
+      "pmid": "38450110",
+      "doi": "10.35772/ghm.2023.01121",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/38450110/",
+      "judge": "OK",
+      "bib_title": "Japan's healthcare delivery system: From its historical evolution to the challenges of a super-aged society",
+      "pubmed_title": "Japan's healthcare delivery system: From its historical evolution to the challenges of a super-aged society."
+    },
+    {
+      "key": "kidoInterprefecturalDisparity2023",
+      "pmid": "37700283",
+      "doi": "10.1186/s12891-023-06820-0",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37700283/",
+      "judge": "OK",
+      "bib_title": "The inter-prefectural regional disparity of healthcare resources and representative surgical procedures in orthopaedics and general surgery: a nationwide study in Japan during 2015--2019",
+      "pubmed_title": "The inter-prefectural regional disparity of healthcare resources and representative surgical procedures in orthopaedics and general surgery: a nationwide study in Japan during 2015-2019."
+    },
+    {
+      "key": "langstonRehabilitationAfterHip2009",
+      "pmid": "32242936",
+      "doi": "10.1002/14651858.CD007125.pub3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32242936/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Multidisciplinary rehabilitation for older people with hip fractures",
+      "pubmed_title": "SARS-CoV-2, the medical profession, ventilator beds, and mortality predictions: personal reflections of an Australian clinician."
+    },
+    {
+      "key": "magazinerHipFractureOutcomes2000",
+      "pmid": "10995047",
+      "doi": "10.1093/gerona/55.9.m498",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/10995047/",
+      "judge": "OK",
+      "bib_title": "Recovery from hip fracture in eight areas of function",
+      "pubmed_title": "Recovery from hip fracture in eight areas of function."
+    },
+    {
+      "key": "mhlwNDBOpenData2023",
+      "pmid": "",
+      "doi": "",
+      "pubmed_url": "",
+      "judge": "OK(公的URL文献)",
+      "bib_title": "NDBオープンデータ第10回",
+      "pubmed_title": ""
+    },
+    {
+      "key": "moranNotesStatisticalAnalysis1950",
+      "pmid": "",
+      "doi": "10.1093/biomet/37.1-2.17",
+      "pubmed_url": "",
+      "judge": "OK(非PubMed想定/DOIあり)",
+      "bib_title": "Notes on continuous stochastic phenomena",
+      "pubmed_title": ""
+    },
+    {
+      "key": "moriiRegionalDisparityRehabilitation2023",
+      "pmid": "37339845",
+      "doi": "10.1136/bmjopen-2023-071670",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37339845/",
+      "judge": "OK",
+      "bib_title": "Regional disparity in the provision of rehabilitation services using the open data from the Japanese national claims database: an ecological study",
+      "pubmed_title": "Regional disparity in the provision of rehabilitation services using the open data from the Japanese national claims database: an ecological study."
+    },
+    {
+      "key": "nooriRegionalDisparitiesRehabilitation2019",
+      "pmid": "41697866",
+      "doi": "10.5435/JAAOS-D-24-00847",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41697866/",
+      "judge": "OK",
+      "bib_title": "Socioeconomic Disparities in Geographic Access to Physical and Occupational Therapy Services in the United States: A Correlation With Area Deprivation and Social Vulnerability Indices",
+      "pubmed_title": "Socioeconomic Disparities in Geographic Access to Physical and Occupational Therapy Services in the United States: A Correlation With Area Deprivation and Social Vulnerability Indices."
+    },
+    {
+      "key": "ottenbacherRehabilitationServicesQuality2004",
+      "pmid": "15377939",
+      "doi": "10.1097/00005650-200410000-00013",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15377939/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Patterns of care and outcomes of care for patients with stroke, hip fracture, or knee replacement",
+      "pubmed_title": "Computed tomography monitoring of radiation-induced lung fibrosis in mice."
+    },
+    {
+      "key": "piantadosiEcologicalStudies1988",
+      "pmid": "",
+      "doi": "10.2307/2531736",
+      "pubmed_url": "",
+      "judge": "OK(非PubMed想定/DOIあり)",
+      "bib_title": "The ecological fallacy",
+      "pubmed_title": ""
+    },
+    {
+      "key": "robinsonEcologicalCorrelations1950",
+      "pmid": "",
+      "doi": "10.2307/2087176",
+      "pubmed_url": "",
+      "judge": "OK(非PubMed想定/DOIあり)",
+      "bib_title": "Ecological correlations and the behavior of individuals",
+      "pubmed_title": ""
+    },
+    {
+      "key": "sakamotoRegionalVariationHip2006",
+      "pmid": "17013729",
+      "doi": "10.1007/s00776-006-1051-7",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/17013729/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Regional variation in hip fracture incidence among the elderly in Japan: the third nationwide survey",
+      "pubmed_title": "Prevalence, patterns, and risk factors of knee osteoarthritis in Thai monks."
+    },
+    {
+      "key": "sekimotoSupplierInducedDemand2015",
+      "pmid": "29698180",
+      "doi": "10.1016/j.vhri.2015.03.010",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29698180/",
+      "judge": "OK",
+      "bib_title": "Supplier-Induced Demand for Chronic Disease Care in Japan: Multilevel Analysis of the Association between Physician Density and Physician-Patient Encounter Frequency",
+      "pubmed_title": "Supplier-Induced Demand for Chronic Disease Care in Japan: Multilevel Analysis of the Association between Physician Density and Physician-Patient Encounter Frequency."
+    },
+    {
+      "key": "sherringtonExercisePreventsHip2008",
+      "pmid": "19093923",
+      "doi": "10.1111/j.1532-5415.2008.02014.x",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19093923/",
+      "judge": "OK",
+      "bib_title": "Effective exercise for the prevention of falls: a systematic review and meta-analysis",
+      "pubmed_title": "Effective exercise for the prevention of falls: a systematic review and meta-analysis."
+    },
+    {
+      "key": "statJapanCensus2020",
+      "pmid": "",
+      "doi": "",
+      "pubmed_url": "",
+      "judge": "OK(公的URL文献)",
+      "bib_title": "令和2年国勢調査",
+      "pubmed_title": ""
+    },
+    {
+      "key": "sutoLiteratureReviewNDB2023",
+      "pmid": "38314426",
+      "doi": "10.31662/jmaj.2023-0078",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/38314426/",
+      "judge": "OK",
+      "bib_title": "Literature Review of Studies Using the National Database of the Health Insurance Claims of Japan (NDB): Limitations and Strategies in Using the NDB for Research",
+      "pubmed_title": "Literature Review of Studies Using the National Database of the Health Insurance Claims of Japan (NDB): Limitations and Strategies in Using the NDB for Research."
+    },
+    {
+      "key": "takusariTrendsHipFracture2020",
+      "pmid": "33615101",
+      "doi": "10.1002/jbm4.10428",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/33615101/",
+      "judge": "OK",
+      "bib_title": "Trends in Hip Fracture Incidence in Japan: Estimates Based on Nationwide Hip Fracture Surveys From 1992 to 2017",
+      "pubmed_title": "Trends in Hip Fracture Incidence in Japan: Estimates Based on Nationwide Hip Fracture Surveys From 1992 to 2017."
+    },
+    {
+      "key": "tanihara2011urbanization",
+      "pmid": "21982582",
+      "doi": "10.1186/1472-6963-11-260",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/21982582/",
+      "judge": "OK",
+      "bib_title": "Urbanization and physician maldistribution: a longitudinal study in Japan",
+      "pubmed_title": "Urbanization and physician maldistribution: a longitudinal study in Japan."
+    },
+    {
+      "key": "toyabeInequalityHospitalDistribution2009",
+      "pmid": "19193213",
+      "doi": "10.1186/1475-9276-8-5",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19193213/",
+      "judge": "要確認: PMIDとタイトル乖離",
+      "bib_title": "Trend in geographic distribution of physicians in Japan",
+      "pubmed_title": "Dying from cancer or other chronic diseases in the Netherlands: ten-year trends derived from death certificate data."
+    },
+    {
+      "key": "whiteHeteroskedasticityConsistentCovariance1980",
+      "pmid": "",
+      "doi": "10.2307/1912934",
+      "pubmed_url": "",
+      "judge": "OK(非PubMed想定/DOIあり)",
+      "bib_title": "A heteroskedasticity-consistent covariance matrix estimator and a direct test for heteroskedasticity",
+      "pubmed_title": ""
+    },
+    {
+      "key": "yoshimuraDeclineHipFracture2005",
+      "pmid": "15940382",
+      "doi": "10.1359/JBMR.050307",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15940382/",
+      "judge": "NG: PMID不達/未登録",
+      "bib_title": "Decline in hip fracture incidence in Japan: the third nationwide survey",
+      "pubmed_title": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+project:
+  output-dir: ../outputs/submission
+
+execute:
+  freeze: auto
+
+format:
+  docx:
+    toc: false
+    number-sections: false
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true

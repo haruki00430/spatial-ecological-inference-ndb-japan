@@ -1,0 +1,15 @@
+project:
+  output-dir: ../outputs/preprint
+
+execute:
+  freeze: auto
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    embed-resources: true
+  docx:
+    toc: false
+    number-sections: false

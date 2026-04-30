@@ -16,8 +16,8 @@ format:
   docx:
     toc: false
     number-sections: false
-bibliography: references.bib
-csl: vancouver.csl
+bibliography: ../references.bib
+csl: ../vancouver.csl
 ---
 
 # Abstract
@@ -103,6 +103,16 @@ All analyses were performed in Python 3.14 using pandas, statsmodels, scipy, geo
 
 **Table 1** summarizes the key variables across 47 prefectures.
 
+| Variable | Mean (SD) | Min | Max |
+|---|---|---|---|
+| Rehab total rate (per 100,000) | 88,389 (35,945) | 27,183 | 183,490 |
+| H002 rate (per 100,000) | 73,892 (30,905) | 22,472 | 158,473 |
+| H003 rate (per 100,000) | 278 (299) | 0 | 1,401 |
+| Hip fracture rate (per 100,000) | 254.0 (37.6) | 167.6 | 329.6 |
+| THA rate (per 100,000) | 70.1 (11.4) | 41.0 | 91.0 |
+| Aging rate (%) | 30.7 (3.1) | 22.6 | 36.4 |
+| Population density (per km²) | 657 (1,223) | 62.6 | 6,403 |
+
 Rehabilitation total claim rates showed a 6.8-fold variation across prefectures (Iwate 27,183 to Kagoshima 183,490 per 100,000). The five prefectures with the highest rehabilitation rates—Kagoshima, Saga, Kochi, Oita, and Fukuoka—were all located in Kyushu and Shikoku regions. The five prefectures with the lowest rates—Iwate, Akita, Fukushima, Niigata, and Aomori—were concentrated in the Tohoku region. Hip fracture surgery rates varied 1.97-fold (Iwate 167.6 to Akita 329.6 per 100,000). Geographic distributions of rehabilitation total rate and hip fracture surgery rate are illustrated in **Figure 1** and **Figure 2**, respectively.
 
 ## Spatial Autocorrelation
@@ -170,7 +180,7 @@ The SEM results provide direct statistical evidence that the positive OLS associ
 
 Prior clinical studies demonstrate that intensive rehabilitation improves post-fracture functional recovery [@magazinerHipFractureOutcomes2000; @langstonRehabilitationAfterHip2009], while exercise programs have been shown to reduce fall risk and subsequent fractures [@sherringtonExercisePreventsHip2008]. The patterns of post-surgical rehabilitation care also vary substantially across healthcare systems [@ottenbacherRehabilitationServicesQuality2004]. However, these individual-level findings cannot be directly translated to ecological correlations. The ecological fallacy—attributing individual-level relationships to aggregate data—is a fundamental limitation first described by Robinson [@robinsonEcologicalCorrelations1950] and extensively documented in the epidemiological literature [@piantadosiEcologicalStudies1988]. Our positive ecological correlation is not inconsistent with individual-level benefits of rehabilitation; the two operate at different levels of analysis.
 
-Geographic variation in rehabilitation use in Japan has been documented in multiple ecological studies using NDB data [@iharaRehabilitationRegionalVariation2020; @moriiRegionalDisparityRehabilitation2023], and the 6.8-fold range in rehabilitation total rates observed in this study is consistent with prior reports of analogous regional disparities in cardiac rehabilitation [@itoRegionalDisparitiesCardiac2022] and in outpatient rehabilitation trends [@horiTrendsOutpatientRehabilitation2022] in Japan. In the United States, geographic disparities in access to rehabilitation services and provider availability have also been reported [@nooriRegionalDisparitiesRehabilitation2019], supporting the broader relevance of supply-side and demand-side drivers of geographic heterogeneity in rehabilitation care.
+Geographic variation in rehabilitation use in Japan has been documented in multiple ecological studies using NDB data [@iharaRehabilitationRegionalVariation2020; @moriiRegionalDisparityRehabilitation2023], and the 6.8-fold range in rehabilitation total rates observed in this study is consistent with prior reports of analogous regional disparities in cardiac rehabilitation [@itoRegionalDisparitiesCardiac2022] and in outpatient rehabilitation trends [@horiTrendsOutpatientRehabilitation2022] in Japan. Geographic variation in rehabilitation use has similarly been reported in the United States [@nooriRegionalDisparitiesRehabilitation2019], reflecting the cross-national ubiquity of supply-side and demand-side drivers of healthcare utilization heterogeneity under universal or near-universal coverage.
 
 ## Limitations
 
@@ -216,12 +226,6 @@ Not applicable.
 
 ---
 
-# Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
-
-During the preparation and writing of this work, the authors used AI-assisted tools to support manuscript drafting and statistical analysis scripting. Cursor 2.0 (Anysphere) and Google Antigravity (Google) were used for AI-assisted writing and Python code development. Large language models used through these platforms included Claude Sonnet 4.6 and Claude Opus 4.6 (Anthropic) and Gemini 3 Pro (Google). These tools were used only for text drafting and code generation; no generative AI or AI-assisted tools were used to create, alter, or otherwise process any figures, images, or artwork in this manuscript. The authors reviewed and edited all AI-assisted outputs and were responsible for the study design, selection of statistical methods, interpretation of findings, conclusions, and final reference list. The authors take full responsibility for the integrity and accuracy of the final content. AI was not listed as an author.
-
----
-
 # References
 
 ::: {#refs}
@@ -229,60 +233,18 @@ During the preparation and writing of this work, the authors used AI-assisted to
 
 ---
 
-# Tables
-
-**Table 1.** Descriptive statistics of prefecture-level variables (N = 47 prefectures).
-
-| Variable | Mean (SD) | Min | Max |
-|---|---|---|---|
-| Rehab total rate (per 100,000) | 88,389 (35,945) | 27,183 | 183,490 |
-| H002 rate (per 100,000) | 73,892 (30,905) | 22,472 | 158,473 |
-| H003 rate (per 100,000) | 278 (299) | 0 | 1,401 |
-| Hip fracture rate (per 100,000) | 254.0 (37.6) | 167.6 | 329.6 |
-| THA rate (per 100,000) | 70.1 (11.4) | 41.0 | 91.0 |
-| Aging rate (%) | 30.7 (3.1) | 22.6 | 36.4 |
-| Population density (per km²) | 657 (1,223) | 62.6 | 6,403 |
-
----
-
-# Figures
+# Figure Captions
 
 **Figure 1.** Choropleth map of prefectural rehabilitation total claim rates (per 100,000 population), Japan FY2023. Higher rates (darker colors) are concentrated in Kyushu and Shikoku regions; lower rates in Tohoku.
 
-![Figure 1. Choropleth map of rehabilitation total claim rates](../03_Analysis/results/figures/fig1_choropleth_rehab_rate.png)
-
----
-
 **Figure 2.** Choropleth map of prefectural hip fracture surgery rates (per 100,000 population), Japan FY2023.
-
-![Figure 2. Choropleth map of hip fracture surgery rates](../03_Analysis/results/figures/fig2_choropleth_fracture_rate.png)
-
----
 
 **Figure 3.** Scatter plot of rehabilitation total claim rate versus hip fracture surgery rate by prefecture (N = 47). Regression line shown with 95% confidence band. Pearson r = 0.447, p = 0.002.
 
-![Figure 3. Scatter plot of rehabilitation rate vs hip fracture rate](../03_Analysis/results/figures/fig3_scatter_rehab_fracture.png)
-
----
-
 **Figure 4.** Scatter plot of disuse-syndrome rehabilitation rate (H002) versus hip fracture surgery rate by prefecture (N = 47). Pearson r = 0.344, p = 0.018.
-
-![Figure 4. Scatter plot of H002 rate vs hip fracture rate](../03_Analysis/results/figures/fig4_scatter_h002_fracture.png)
-
----
 
 **Figure 5.** Scatter plot of musculoskeletal rehabilitation rate (H003) versus hip fracture surgery rate by prefecture (N = 47). Pearson r = 0.345, p = 0.018.
 
-![Figure 5. Scatter plot of H003 rate vs hip fracture rate](../03_Analysis/results/figures/fig5_scatter_h003_fracture.png)
-
----
-
 **Figure 6.** Forest plot of six sensitivity analyses for the primary exposure (rehabilitation total rate) and outcome (hip fracture surgery rate). Red markers indicate p < 0.05; all six specifications are statistically significant.
 
-![Figure 6. Forest plot of sensitivity analyses](../03_Analysis/results/figures/fig6_forest_sensitivity.png)
-
----
-
 **Figure 7.** Correlation heatmap among key variables (N = 47 prefectures). Cell values are Pearson correlation coefficients.
-
-![Figure 7. Correlation heatmap](../03_Analysis/results/figures/fig7_correlation_heatmap.png)

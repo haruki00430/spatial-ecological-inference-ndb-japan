@@ -1,0 +1,25 @@
+---
+title: "Regional Disparities in Rehabilitation Provision and Hip Fracture Surgery Rates Among Older Adults in Japan: A Nationwide Ecological Study"
+author:
+  - name: "[Author 1]"
+    affiliation: "[Affiliation 1]"
+  - name: "[Author 2]"
+    affiliation: "[Affiliation 2]"
+date: "2026-04-15"
+format:
+  docx:
+    toc: false
+    number-sections: false
+    output-file: ../outputs/submission/submission.docx
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    output-file: ../outputs/submission/submission.html
+bibliography: ../references.bib
+csl: ../vancouver.csl
+---
+
+{{< include ../core/manuscript_core.qmd >}}
+
+{{< include ../includes/submission_journal_notes.qmd >}}

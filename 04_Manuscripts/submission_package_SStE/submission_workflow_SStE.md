@@ -74,7 +74,7 @@
 - [x] Keywords 6語
 - [x] Highlights 5項目 × 各≤85文字
 - [x] Graphical Abstract 作成（531×1328 px 以上）
-- [ ] 全文語数（References・Tables・Figure legends 除く）— Word で最終確認
+- [x] 全文語数（References・Tables・Figure legends 除く）— **2,430語**（Introduction–Conclusions、自動集計 2026-06-27）
 - [x] 図5点・表2点の番号・キャプション一致
 
 ### 4-2. SStE / Elsevier 必須記載事項
@@ -90,7 +90,7 @@
 
 - [x] PNG 300 dpi 相当（choropleth / scatter / forest）
 - [ ] 必要に応じ TIFF 変換（Elsevier Artwork Guidelines 参照）
-- [x] 図は本文に埋め込まず別ファイルアップロード
+- [x] 図は本文 DOCX に埋め込まず、PNG を EM で別アップロード（2026-06-27 確認済み）
 
 ### 4-4. コード公開
 

@@ -15,6 +15,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from docx import Document
+from docx.oxml.ns import qn
 from docx.shared import Pt
 from PIL import Image
 
@@ -59,6 +60,17 @@ ORCID_LINE = (
     "ORCID: Haruki Saito 0009-0009-7890-6068; Tetsuya Ohira 0000-0003-4532-7165"
 )
 
+NDB_REHAB_TABLE_EN = (
+    '"H_Rehabilitation: prefecture-level claim counts and units" '
+    "(NDB medical-procedure table)"
+)
+DATA_AVAILABILITY_TEXT = (
+    f"Analysis scripts and aggregate prefecture-level datasets are available at "
+    f"{GITHUB_URL} and on Zenodo ({ZENODO_PLACEHOLDER}). "
+    f"NDB Open Data No.10 is publicly available at: "
+    f"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html"
+)
+
 
 def make_para_elem(doc_ref: Document, text: str, style_name: str | None = None) -> object:
     """一時段落を作成し、XML要素のみ返す。"""
@@ -77,14 +89,170 @@ def insert_after(anchor, new_elem) -> None:
     elem.addnext(new_elem)
 
 
+def sanitize_metadata(doc: Document) -> None:
+    """投稿用に著者名などのドキュメントメタデータを除去する。"""
+    core = doc.core_properties
+    core.author = ""
+    core.last_modified_by = ""
+    core.title = ""
+    core.subject = ""
+    core.keywords = ""
+    core.category = ""
+    core.comments = ""
+
+
+def strip_embedded_figures(doc: Document) -> int:
+    """原稿内の埋め込み図を削除する（Figure は EM で別アップロード）。"""
+    removed = 0
+    for section in (doc.element.body,):
+        for drawing in section.findall(".//" + qn("w:drawing")):
+            drawing.getparent().remove(drawing)
+            removed += 1
+    for section in doc.sections:
+        for header_footer in (section.header, section.footer):
+            if header_footer is None:
+                continue
+            for drawing in header_footer._element.findall(".//" + qn("w:drawing")):
+                drawing.getparent().remove(drawing)
+                removed += 1
+    return removed
+
+
+def remove_redundant_short_figure_captions(doc: Document) -> int:
+    """References 以降で同一 Fig 番号の短い重複キャプションを削除する。"""
+    import re
+
+    after_refs = False
+    seen: dict[str, str] = {}
+    to_remove = []
+
+    fig_re = re.compile(
+        r"^(Figure \d+|Supplementary Figure S\d+)\.\s*(.+)$", re.IGNORECASE
+    )
+
+    for para in doc.paragraphs:
+        text = para.text.strip()
+        if text == "References":
+            after_refs = True
+            continue
+        if not after_refs or not text:
+            continue
+        match = fig_re.match(text)
+        if not match:
+            continue
+        label, body = match.group(1), match.group(2)
+        prev = seen.get(label)
+        if prev is None:
+            seen[label] = text
+            continue
+        if len(text) < len(prev):
+            to_remove.append(para._element)
+        else:
+            for old_para in doc.paragraphs:
+                if old_para.text.strip() == prev:
+                    to_remove.append(old_para._element)
+                    break
+            seen[label] = text
+
+    for elem in to_remove:
+        parent = elem.getparent()
+        if parent is not None:
+            parent.remove(elem)
+    return len(to_remove)
+
+
+def polish_manuscript_text(doc: Document) -> None:
+    """投稿原稿の英語表記・内部コード・重複記載を修正する。"""
+    import re
+
+    jp_re = re.compile(r"[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]")
+
+    rehab_para_new = (
+        "Rehabilitation claim data were extracted from the NDB Open Data No.10 "
+        f"{NDB_REHAB_TABLE_EN}. Five rehabilitation categories were extracted:"
+    )
+    outcome_para_new = (
+        "Hip fracture surgery rates were derived from NDB Open Data No.10 "
+        "surgical procedure tables. Femoral fracture surgery procedures included: "
+        "K044 (bone fragment removal), K045 (internal fixation), K046 (closed "
+        "reduction with internal fixation), K081 (femoral head replacement: "
+        "hemiarthroplasty), and K082 (total hip arthroplasty: THA). Primary "
+        "outcome was the aggregate hip fracture surgery rate per 100,000 total "
+        "population. Secondary outcomes included THA-specific (K082) and "
+        "hemiarthroplasty-specific (K081) rates."
+    )
+
+    to_delete = []
+    in_data_availability = False
+    data_availability_written = False
+
+    for para in doc.paragraphs:
+        text = para.text.strip()
+
+        if text == "2026-06-19":
+            to_delete.append(para._element)
+            continue
+
+        if jp_re.search(para.text) or "リハビリ" in para.text:
+            para.clear()
+            para.add_run(rehab_para_new)
+            continue
+
+        if "NDB_XXX_slope_fracture" in para.text:
+            para.clear()
+            para.add_run(outcome_para_new)
+            continue
+
+        if text == "Data Availability":
+            in_data_availability = True
+            continue
+
+        if in_data_availability:
+            if text in ("Competing Interests", "Funding"):
+                in_data_availability = False
+            elif text and not data_availability_written:
+                para.clear()
+                para.add_run(DATA_AVAILABILITY_TEXT)
+                data_availability_written = True
+            elif text:
+                to_delete.append(para._element)
+
+    for elem in to_delete:
+        parent = elem.getparent()
+        if parent is not None:
+            parent.remove(elem)
+
+    remove_legend_artifacts(doc)
+
+
+def remove_legend_artifacts(doc: Document) -> None:
+    """図削除後の空段落と冗長見出しを整理する。"""
+    after_refs = False
+    to_delete = []
+
+    for para in doc.paragraphs:
+        text = para.text.strip()
+        if text == "References":
+            after_refs = True
+            continue
+        if not after_refs:
+            continue
+        if text == "Main Figures":
+            to_delete.append(para._element)
+        elif not text:
+            to_delete.append(para._element)
+
+    for elem in to_delete:
+        parent = elem.getparent()
+        if parent is not None:
+            parent.remove(elem)
+
+
 def modify_manuscript() -> None:
     """SStE投稿規定に合わせて原稿DOCXを修正する。"""
     doc = Document(str(SRC_DOCX))
 
-    # メタデータの著者情報をクリア
-    core = doc.core_properties
-    core.author = ""
-    core.last_modified_by = ""
+    sanitize_metadata(doc)
 
     # 著者所属・通信著者（PDS 原稿形式に合わせる）
     haruki_para = None
@@ -126,16 +294,11 @@ def modify_manuscript() -> None:
             para.add_run(f"Keywords: {KEYWORDS_SSTE}")
             break
 
-    # Data Availability
+    # Data Availability（polish_manuscript_text で最終統一。ここでは旧形式のみ更新）
     for para in doc.paragraphs:
         if para.text.strip().startswith("Analysis scripts are available at:"):
             para.clear()
-            para.add_run(
-                f"Analysis scripts and aggregate prefecture-level datasets are available at "
-                f"{GITHUB_URL} and on Zenodo ({ZENODO_PLACEHOLDER}). "
-                f"NDB Open Data No.10 is publicly available at: "
-                f"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html"
-            )
+            para.add_run(DATA_AVAILABILITY_TEXT)
             break
 
     # Authors' Contributions（CRediT形式）
@@ -170,9 +333,16 @@ def modify_manuscript() -> None:
                 anchor.addnext(elem)
                 anchor = elem
 
+    removed_figures = strip_embedded_figures(doc)
+    removed_captions = remove_redundant_short_figure_captions(doc)
+    polish_manuscript_text(doc)
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     doc.save(str(OUT_DOCX))
-    print(f"[OK] Manuscript saved: {OUT_DOCX}")
+    print(
+        f"[OK] Manuscript saved: {OUT_DOCX} "
+        f"(removed {removed_figures} embedded figures, {removed_captions} duplicate captions)"
+    )
 
 
 def copy_figures() -> None:

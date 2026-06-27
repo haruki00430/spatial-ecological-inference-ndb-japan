@@ -37,10 +37,9 @@
 - EM分類: **Cover Letter**
 
 ### Step 2: Manuscript（本文）
-- `Manuscript_SStE.docx`
+- `Manuscript_SStE.docx`（**図なし版** — キャプションのみ。Figure PNG は Step 5–6 で別アップロード）
 - EM分類: **Manuscript**
 - 本文に Highlights・Abstract・Tables 1–2・Figure Legends を含む
-- **図のPNGは別途アップロード**（Step 4）
 
 ### Step 3: Highlights（必須）
 - `Highlights_SStE.docx`（または `Highlights_SStE.txt` から5行をコピー）
@@ -86,7 +85,9 @@
 - [x] CRediT Author Contributions 記載済み ✓
 - [x] AI Disclosure 記載済み ✓
 - [x] Data Availability（GitHub + Zenodo プレースホルダ）記載済み ✓
-- [ ] **本文語数最終確認**（Word → References・Tables・Figure legends 除く）
+- [x] **本文語数確認済み** — Introduction–Conclusions **2,430語**（Abstract 235語）
+- [x] **メタデータ確認済み** — author / lastModifiedBy / title 等は空
+- [x] **図の二重掲載リスク解消** — DOCX から埋め込み図7点削除、PNG は別アップロード
 
 ### 著者情報（EM入力）
 

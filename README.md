@@ -109,7 +109,7 @@ See **[REPRODUCE.md](REPRODUCE.md)** for full details.
 | Name | Affiliation | ORCID |
 |------|-------------|-------|
 | **Haruki Saito** (Corresponding) | Department of Epidemiology, Fukushima Medical University School of Medicine | [0009-0009-7890-6068](https://orcid.org/0009-0009-7890-6068) |
-| Tetsuya Ohira | Department of Epidemiology, Fukushima Medical University School of Medicine | [0000-0003-4532-7165](https://orcid.org/0000-0003-4532-7165) |
+| Tetsuya Ohira | Department of Epidemiology, Fukushima Medical University School of Medicine; Radiation Medical Science Center for the Fukushima Health Management Survey, Fukushima Medical University | [0000-0003-4532-7165](https://orcid.org/0000-0003-4532-7165) |
 
 ---
 

@@ -46,6 +46,19 @@ RUNNING_TITLE = (
     "Spatial dependence alters ecological healthcare data interpretation"
 )
 
+AFFILIATION_1 = (
+    "Department of Epidemiology, Fukushima Medical University School of Medicine, "
+    "Fukushima, Japan"
+)
+AFFILIATION_2 = (
+    "Radiation Medical Science Center for the Fukushima Health Management Survey, "
+    "Fukushima Medical University, Fukushima, Japan"
+)
+AUTHOR_LINE = "Haruki Saito1, Tetsuya Ohira1,2"
+ORCID_LINE = (
+    "ORCID: Haruki Saito 0009-0009-7890-6068; Tetsuya Ohira 0000-0003-4532-7165"
+)
+
 
 def make_para_elem(doc_ref: Document, text: str, style_name: str | None = None) -> object:
     """一時段落を作成し、XML要素のみ返す。"""
@@ -73,30 +86,38 @@ def modify_manuscript() -> None:
     core.author = ""
     core.last_modified_by = ""
 
-    # 著者所属・通信著者（タイトル直後）
-    author_block = None
+    # 著者所属・通信著者（PDS 原稿形式に合わせる）
+    haruki_para = None
+    ohira_para = None
     for para in doc.paragraphs:
-        if para.text.strip() == "Tetsuya Ohira":
-            author_block = para
-            break
+        if para.text.strip() == "Haruki Saito":
+            haruki_para = para
+        elif para.text.strip() == "Tetsuya Ohira":
+            ohira_para = para
 
-    if author_block is not None:
-        aff1 = make_para_elem(
-            doc,
-            "Department of Epidemiology, Fukushima Medical University School of Medicine, "
+    if haruki_para is not None:
+        haruki_para.clear()
+        haruki_para.add_run(AUTHOR_LINE)
+
+        if ohira_para is not None:
+            ohira_para._element.getparent().remove(ohira_para._element)
+
+        author_block_lines = [
+            AFFILIATION_1,
+            AFFILIATION_2,
+            ORCID_LINE,
+            "Corresponding author: Haruki Saito",
+            "Department of Epidemiology, Fukushima Medical University School of Medicine",
             "1 Hikarigaoka, Fukushima-shi, Fukushima 960-1295, Japan",
-            "First Paragraph",
-        )
-        corr = make_para_elem(
-            doc,
-            "*Corresponding author: Haruki Saito (haruki00430@gmail.com; "
-            "ORCID: 0009-0009-7890-6068)",
-            "First Paragraph",
-        )
-        run_title = make_para_elem(doc, f"Running title: {RUNNING_TITLE}", "First Paragraph")
-        insert_after(author_block, aff1)
-        insert_after(aff1, corr)
-        insert_after(corr, run_title)
+            "Email: m211039@fmu.ac.jp",
+            "ORCID: 0009-0009-7890-6068",
+            f"Running title: {RUNNING_TITLE}",
+        ]
+        anchor_elem = haruki_para._element
+        for text in author_block_lines:
+            new_elem = make_para_elem(doc, text, "First Paragraph")
+            insert_after(anchor_elem, new_elem)
+            anchor_elem = new_elem
 
     # キーワードを6語以内に調整
     for para in doc.paragraphs:

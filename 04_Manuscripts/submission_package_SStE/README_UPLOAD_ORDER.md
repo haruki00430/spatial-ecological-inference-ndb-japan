@@ -95,7 +95,7 @@
 | Haruki Saito | Fukushima Medical University | 0009-0009-7890-6068 | Corresponding |
 | Tetsuya Ohira | Fukushima Medical University | 0000-0003-4532-7165 | Co-author |
 
-**通信著者メール**: haruki00430@gmail.com
+**通信著者メール**: m211039@fmu.ac.jp
 
 ---
 

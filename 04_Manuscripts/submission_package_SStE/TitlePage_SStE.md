@@ -16,12 +16,20 @@ Spatial dependence alters ecological healthcare data interpretation
 
 ## Authors
 
+**Haruki Saito1, Tetsuya Ohira1,2**
+
+1. Department of Epidemiology, Fukushima Medical University School of Medicine, Fukushima, Japan  
+2. Radiation Medical Science Center for the Fukushima Health Management Survey, Fukushima Medical University, Fukushima, Japan
+
 | # | Name | Affiliation | ORCID | Email |
 |---|------|-------------|-------|-------|
-| 1 | **Haruki Saito, MD** | Department of Epidemiology, Fukushima Medical University School of Medicine, 1 Hikarigaoka, Fukushima-shi, Fukushima 960-1295, Japan | 0009-0009-7890-6068 | haruki00430@gmail.com |
-| 2 | **Tetsuya Ohira, MD, PhD** | Department of Epidemiology, Fukushima Medical University School of Medicine, Fukushima, Japan | 0000-0003-4532-7165 | — |
+| 1 | **Haruki Saito, MD** | 1 | 0009-0009-7890-6068 | m211039@fmu.ac.jp |
+| 2 | **Tetsuya Ohira, MD, PhD** | 1, 2 | 0000-0003-4532-7165 | — |
 
-**Corresponding author:** Haruki Saito (haruki00430@gmail.com)
+**Corresponding author:** Haruki Saito  
+Department of Epidemiology, Fukushima Medical University School of Medicine  
+1 Hikarigaoka, Fukushima-shi, Fukushima 960-1295, Japan  
+Email: m211039@fmu.ac.jp · ORCID: 0009-0009-7890-6068
 
 ---
 

@@ -44,12 +44,12 @@ Sincerely,
 Department of Epidemiology  
 Fukushima Medical University School of Medicine  
 1 Hikarigaoka, Fukushima-shi, Fukushima 960-1295, Japan  
-Email: haruki00430@gmail.com  
+Email: m211039@fmu.ac.jp  
 ORCID: 0009-0009-7890-6068
 
 **Tetsuya Ohira, MD, PhD**  
-Department of Epidemiology  
-Fukushima Medical University School of Medicine  
+Department of Epidemiology, Fukushima Medical University School of Medicine  
+Radiation Medical Science Center for the Fukushima Health Management Survey, Fukushima Medical University  
 ORCID: 0000-0003-4532-7165
 
 *On behalf of all authors*

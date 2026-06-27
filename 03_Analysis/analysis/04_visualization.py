@@ -16,31 +16,38 @@ NDB_XXX_rehabilitation_regional
 
 import os
 import sys
-import pandas as pd
-import numpy as np
+
+import geopandas as gpd
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import numpy as np
+import pandas as pd
 import seaborn as sns
-import geopandas as gpd
 from scipy import stats
 
-PROJECT_ROOT = "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub"
-PROJECT_DIR = os.path.join(PROJECT_ROOT, "projects", "NDB_XXX_rehabilitation_regional")
-sys.path.append(os.path.join(PROJECT_ROOT, "src"))
+matplotlib.use("Agg")
 
-from ndb_library.viz import set_japanese_font
+from _project_paths import (
+    DATA_INTERIM,
+    DATA_RELEASE,
+    FIGURES_DIR,
+    GEOJSON_PATH,
+    LOG_DIR,
+    RESULTS_DIR,
+    ensure_ndb_library,
+)
+
+ensure_ndb_library()
 from ndb_library.logger import setup_logger
+from ndb_library.viz import set_japanese_font
 
 set_japanese_font()
 
-LOG_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "analysis", "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
-logger = setup_logger(__name__, log_file=os.path.join(LOG_DIR, "phase5_visualization.log"))
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+logger = setup_logger(__name__, log_file=str(LOG_DIR / "phase5_visualization.log"))
 
-FIGURES_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "results", "figures")
-os.makedirs(FIGURES_DIR, exist_ok=True)
+FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 PREF_EN = {
     "北海道": "Hokkaido", "青森県": "Aomori", "岩手県": "Iwate", "宮城県": "Miyagi",
@@ -60,16 +67,18 @@ PREF_EN = {
 # ======================================================
 # データ読み込み
 # ======================================================
-df = pd.read_csv(
-    os.path.join(PROJECT_DIR, "02_Data", "interim", "analysis_dataset.csv"),
-    encoding="utf-8"
-)
-df_reg = pd.read_csv(
-    os.path.join(PROJECT_DIR, "03_Analysis", "results", "regression_results.csv"),
-    encoding="utf-8"
-)
+dataset_path = DATA_INTERIM / "analysis_dataset.csv"
+if not dataset_path.exists():
+    dataset_path = DATA_RELEASE / "analysis_dataset_prefecture_n47.csv"
+df = pd.read_csv(dataset_path, encoding="utf-8")
 
-GEOJSON_PATH = os.path.join(PROJECT_ROOT, "02_Data", "raw", "GIS", "japan.geojson")
+regression_path = RESULTS_DIR / "regression_results.csv"
+if not regression_path.exists():
+    raise FileNotFoundError(
+        "regression_results.csv not found. Run 03_integrate_and_analyze.py first."
+    )
+df_reg = pd.read_csv(regression_path, encoding="utf-8")
+
 gdf = gpd.read_file(GEOJSON_PATH)
 gdf = gdf.merge(df, left_on="nam_ja", right_on="prefecture", how="left")
 

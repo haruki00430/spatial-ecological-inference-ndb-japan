@@ -29,6 +29,7 @@ ENV/
 !data/release/**
 !data/release/*.csv
 !data/release/*.md
+!03_Analysis/results/*.csv
 *.log
 05_Outputs/figures/
 05_Outputs/reports/

@@ -1,6 +1,6 @@
 project:
-  name: "NDB_XXX_rehabilitation_regional"
-  description: "回復期リハビリ提供量の地域格差と骨折アウトカムの生態学的関連"
+  name: "spatial-ecological-inference-ndb-japan"
+  description: "Spatial ecological inference with Japanese NDB Open Data (rehabilitation vs hip fracture surgery rates)"
   experiment_mode: false
 
 data_sources:

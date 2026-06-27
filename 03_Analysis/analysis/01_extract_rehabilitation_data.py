@@ -1,47 +1,31 @@
 """
+Phase 1: Extract prefecture-level rehabilitation claims from NDB Open Data No.10.
 Phase 1: リハビリテーションデータ抽出（ワイド形式対応版）
-NDB Open Data No.10「H_リハビリテーション 都道府県別算定回数／単位数.xlsx」から
-都道府県別・リハビリ種別の算定回数を抽出する。
 
-Excel構造:
-  行0: 説明文（長テキスト）
-  行1: NaN
-  行2: カラムヘッダ（行コード, 項目名称, 診療コード, 診療科, 点数, 合計, 01, 02, ...）
-  行3: 都道府県名（NaN, NaN, NaN, NaN, NaN, NaN, 北海道, 青森県, ...）
-  行4+: データ（H000〜H008の各行、複数行で1コード、列0はffill要）
-
-NDBコード（実際の意味）:
-  H000: 心大血管疾患リハビリテーション料
-  H001: 脳血管疾患等リハビリテーション料
-  H002: 廃用症候群リハビリテーション料  <- 骨折後廃用予防に最重要
-  H003: 運動器リハビリテーション料      <- 整形外科・骨折に直接関連
-  H004: 呼吸器リハビリテーション料
-
-出力: 02_Data/interim/rehabilitation_prefecture.csv
+Output / 出力: 02_Data/interim/rehabilitation_prefecture.csv
 """
 import os
 import sys
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import yaml
 
-PROJECT_ROOT = "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub"
-PROJECT_DIR = os.path.join(PROJECT_ROOT, "projects", "NDB_XXX_rehabilitation_regional")
-sys.path.append(os.path.join(PROJECT_ROOT, "src"))
+from _project_paths import CONFIG_PATH, DATA_INTERIM, LOG_DIR, ensure_ndb_library
 
-from ndb_library.utils import clean_numeric
+ensure_ndb_library()
 from ndb_library.logger import setup_logger
+from ndb_library.utils import clean_numeric
 
-LOG_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "analysis", "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
-logger = setup_logger(__name__, log_file=os.path.join(LOG_DIR, "phase1_extract.log"))
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+logger = setup_logger(__name__, log_file=str(LOG_DIR / "phase1_extract.log"))
 
-with open(os.path.join(PROJECT_DIR, "config", "config.yaml"), "r", encoding="utf-8") as f:
+with open(CONFIG_PATH, "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
 NDB_ROOT = config["data_sources"]["ndb_root"]
-OUTPUT_DIR = os.path.join(PROJECT_DIR, config["output"]["interim_dir"])
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+OUTPUT_DIR = DATA_INTERIM
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ========================================
 # Step 1: Excelファイル読み込み（ヘッダなし）

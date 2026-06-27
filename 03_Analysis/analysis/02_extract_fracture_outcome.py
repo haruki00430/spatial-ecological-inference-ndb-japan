@@ -1,37 +1,29 @@
 """
+Phase 2: Prepare hip fracture surgery outcome rates by prefecture.
 Phase 2: 骨折アウトカムデータ整備
-slope_fractureプロジェクトの fracture_surgery_site.csv（ワイド形式）から
-都道府県別の大腿骨骨折手術件数を集計する。
 
-骨折手術コード（対象: femur サイトのみ）:
-  K044_ClosedReduction: 骨折非観血的整復術（大腿骨）
-  K045_Percutaneous:    経皮的鋼線刺入固定術（大腿骨）
-  K046_ORIF:            骨折観血的整復術（大腿骨）
-  K081_Hemiarthroplasty: 人工骨頭挿入術（大腿骨）
-  K082_THA:             人工関節置換術（大腿骨・股関節）
-
-出力: 02_Data/interim/fracture_outcome.csv
+Output / 出力: 02_Data/interim/fracture_outcome.csv
 """
 import os
 import sys
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import yaml
 
-PROJECT_ROOT = "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub"
-PROJECT_DIR = os.path.join(PROJECT_ROOT, "projects", "NDB_XXX_rehabilitation_regional")
-sys.path.append(os.path.join(PROJECT_ROOT, "src"))
+from _project_paths import CONFIG_PATH, DATA_INTERIM, LOG_DIR, ensure_ndb_library
 
+ensure_ndb_library()
 from ndb_library.logger import setup_logger
 
-LOG_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "analysis", "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
-logger = setup_logger(__name__, log_file=os.path.join(LOG_DIR, "phase2_fracture.log"))
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+logger = setup_logger(__name__, log_file=str(LOG_DIR / "phase2_fracture.log"))
 
-with open(os.path.join(PROJECT_DIR, "config", "config.yaml"), "r", encoding="utf-8") as f:
+with open(CONFIG_PATH, "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
-OUTPUT_DIR = os.path.join(PROJECT_DIR, config["output"]["interim_dir"])
+OUTPUT_DIR = DATA_INTERIM
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ========================================
 # Step 1: 骨折手術データ読み込み（ワイド形式）

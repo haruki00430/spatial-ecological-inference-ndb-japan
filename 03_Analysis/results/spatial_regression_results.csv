@@ -1,0 +1,4 @@
+model,exposure_coef,exposure_stat,exposure_p,spatial_param,spatial_stat,spatial_p,aic,r2_or_pr2,lm_lag_p,lm_error_p,rlm_lag_p,rlm_error_p
+OLS,0.000499,4.472,0.0001,,,,447.579,0.5112,0.069,0.0005,0.5665,0.0025
+SLM,0.00044,4.203,0.0,0.1277,1.831,0.067,446.265,0.5465,,,,
+SEM,0.000164,1.514,0.1301,0.6714,6.652,0.0,430.952,0.4064,,,,

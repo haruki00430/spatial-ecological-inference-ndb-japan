@@ -9,7 +9,7 @@
 
 **Manuscript status**: Under review at *Spatial and Spatio-temporal Epidemiology* (2026-06-27 submission)  
 **Repository:** https://github.com/haruki00430/spatial-ecological-inference-ndb-japan  
-**Zenodo DOI:** https://doi.org/10.5281/zenodo.XXXXXXX *(update after release)*
+**Zenodo DOI:** https://doi.org/10.5281/zenodo.20951654
 
 ---
 
@@ -121,7 +121,7 @@ Administrative Healthcare Data: Lessons From Rehabilitation Provision and Hip
 Fracture Surgery Rates in Japan. Spatial and Spatio-temporal Epidemiology
 (under review, 2026).
 GitHub: https://github.com/haruki00430/spatial-ecological-inference-ndb-japan
-Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX
+Zenodo: https://doi.org/10.5281/zenodo.20951654
 ```
 
 See [`CITATION.cff`](CITATION.cff) for machine-readable metadata.

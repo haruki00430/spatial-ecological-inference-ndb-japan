@@ -59,7 +59,7 @@
 | Highlights | 本文 Abstract 直前に5項目挿入 + 別ファイル作成 |
 | Keywords | 8語 → **6語**（Elsevier 上限準拠） |
 | Authors' Contributions | CRediT 形式に著者名を反映 |
-| Data Availability | GitHub URL + Zenodo プレースホルダを追記 |
+| Data Availability | GitHub URL + Zenodo DOI `10.5281/zenodo.20951654` |
 | 図構成 | メイン5点 + 補足2点（原稿20260619版に準拠） |
 
 ---
@@ -94,9 +94,9 @@
 
 ### 4-4. コード公開
 
-- [ ] GitHub 公開前チェック（`.gitignore` で raw データ除外確認）
-- [ ] GitHub Release → Zenodo DOI 取得
-- [ ] Data Availability の DOI プレースホルダ更新
+- [x] GitHub 公開前チェック（`.gitignore` で raw データ除外確認）
+- [x] GitHub Release `v1.0.1` → Zenodo DOI `10.5281/zenodo.20951654`
+- [x] Data Availability の DOI 反映済み
 
 ---
 

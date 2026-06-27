@@ -16,8 +16,9 @@
 | Zenodo–GitHub 連携 ON | ✅ 完了（ユーザー設定済み） |
 | 公開用 README / REPRODUCE / DATA_SOURCES / LICENSE | ✅ 完了 |
 | `data/release/analysis_dataset_prefecture_n47.csv` | ✅ コミット済み |
-| GitHub Release | ☐ v1.0.1 作成後に Zenodo 同期 |
-| Zenodo DOI → 原稿反映 | ☐ Release 後に `update_zenodo_doi.py` 実行 |
+| GitHub Release `v1.0.1` | ✅ 完了 |
+| Zenodo DOI `10.5281/zenodo.20951654` | ✅ 完了 |
+| 原稿 Data Availability 反映 | ✅ 完了 |
 
 **リポジトリ URL:** https://github.com/haruki00430/spatial-ecological-inference-ndb-japan
 
@@ -27,11 +28,11 @@
 
 1. GitHub で Release `v1.0.1` を公開（Zenodo 連携 ON 後の初回 Release）
 2. 数分待ち、Zenodo の Repositories ページで Release が表示されることを確認
-3. DOI を取得（例: `10.5281/zenodo.12345678`）
+3. DOI を取得（例: `10.5281/zenodo.20951654`）
 4. 以下を実行して原稿・ドキュメント一括更新:
 
 ```bash
-python 04_Manuscripts/update_zenodo_doi.py 10.5281/zenodo.12345678
+python 04_Manuscripts/update_zenodo_doi.py 10.5281/zenodo.20951654
 python 04_Manuscripts/prepare_submission_sste.py
 ```
 
@@ -42,7 +43,7 @@ python 04_Manuscripts/prepare_submission_sste.py
 ```
 Saito H, Ohira T. How Spatial Dependence Alters Ecological Interpretation...
 GitHub: https://github.com/haruki00430/spatial-ecological-inference-ndb-japan
-Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX
+Zenodo: https://doi.org/10.5281/zenodo.20951654
 ```
 
 ---

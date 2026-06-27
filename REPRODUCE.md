@@ -3,7 +3,7 @@
 **Project:** `spatial-ecological-inference-ndb-japan`  
 **Manuscript:** *How Spatial Dependence Alters Ecological Interpretation of Administrative Healthcare Data*  
 **Repository:** https://github.com/haruki00430/spatial-ecological-inference-ndb-japan  
-**Zenodo DOI:** `10.5281/zenodo.XXXXXXX` — *update after GitHub Release*
+**Zenodo DOI:** `10.5281/zenodo.20951654`
 
 This guide describes how to reproduce the **prefecture-level aggregated analysis (N = 47)** reported in the manuscript.
 

@@ -26,7 +26,7 @@ OUT_DIR = MANUSCRIPTS / "submission_package_SStE"
 OUT_DOCX = OUT_DIR / "Manuscript_SStE.docx"
 
 GITHUB_URL = "https://github.com/haruki00430/spatial-ecological-inference-ndb-japan"
-ZENODO_DOI = "10.5281/zenodo.XXXXXXX"  # Updated after GitHub Release
+ZENODO_DOI = "10.5281/zenodo.20951654"  # Updated after GitHub Release
 ZENODO_PLACEHOLDER = f"https://doi.org/{ZENODO_DOI}"
 
 KEYWORDS_SSTE = (

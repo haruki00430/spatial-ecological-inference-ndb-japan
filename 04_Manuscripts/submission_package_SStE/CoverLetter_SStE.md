@@ -26,7 +26,7 @@ To our knowledge, this is among the first prefecture-level studies to show that 
 This study used only publicly available, aggregate NDB Open Data with no individual-level records. Ethics committee approval was not required.
 
 **Data and code availability:**  
-Analysis scripts and aggregate datasets are archived at https://github.com/haruki00430/NDB_XXX_rehabilitation_regional (Zenodo DOI to be assigned upon release).
+Analysis scripts and aggregate datasets are archived at https://github.com/haruki00430/spatial-ecological-inference-ndb-japan and on Zenodo (https://doi.org/10.5281/zenodo.20951654).
 
 **Authorship and conflicts:**  
 All authors approved the manuscript and declare no competing interests. This work received no specific funding.

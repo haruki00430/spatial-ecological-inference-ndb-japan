@@ -21,27 +21,32 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 
-PROJECT_ROOT = "C:/Users/user/.ag-cursor-common/research_workspace/projects/NDB_Research_Hub"
-PROJECT_DIR  = os.path.join(PROJECT_ROOT, "projects", "NDB_XXX_rehabilitation_regional")
-sys.path.append(os.path.join(PROJECT_ROOT, "src"))
+from _project_paths import (
+    DATA_INTERIM,
+    DATA_RELEASE,
+    GEOJSON_PATH,
+    LOG_DIR,
+    PROJECT_DIR,
+    RESULTS_DIR,
+    ensure_ndb_library,
+)
 
+ensure_ndb_library()
 from ndb_library.logger import setup_logger
 
-LOG_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "analysis", "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
-logger = setup_logger(__name__, log_file=os.path.join(LOG_DIR, "phase_spatial_regression.log"))
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+logger = setup_logger(__name__, log_file=str(LOG_DIR / "phase_spatial_regression.log"))
 
-RESULTS_DIR = os.path.join(PROJECT_DIR, "03_Analysis", "results")
-os.makedirs(RESULTS_DIR, exist_ok=True)
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # ======================================================
 # Data loading
 # ======================================================
-df = pd.read_csv(
-    os.path.join(PROJECT_DIR, "02_Data", "interim", "analysis_dataset.csv"),
-    encoding="utf-8"
-)
-gdf = gpd.read_file(os.path.join(PROJECT_ROOT, "02_Data", "raw", "GIS", "japan.geojson"))
+dataset_path = DATA_INTERIM / "analysis_dataset.csv"
+if not dataset_path.exists():
+    dataset_path = DATA_RELEASE / "analysis_dataset_prefecture_n47.csv"
+df = pd.read_csv(dataset_path, encoding="utf-8")
+gdf = gpd.read_file(GEOJSON_PATH)
 gdf = gdf.merge(df, left_on="nam_ja", right_on="prefecture", how="left")
 gdf = gdf.dropna(subset=["rehab_total_rate", "hip_fracture_rate"]).copy().reset_index(drop=True)
 logger.info(f"Spatial data: {len(gdf)} prefectures")
@@ -146,7 +151,7 @@ rows = [
          lm_lag_p=None, lm_error_p=None, rlm_lag_p=None, rlm_error_p=None),
 ]
 
-out_path = os.path.join(RESULTS_DIR, "spatial_regression_results.csv")
+out_path = RESULTS_DIR / "spatial_regression_results.csv"
 pd.DataFrame(rows).to_csv(out_path, index=False, encoding="utf-8")
 logger.info(f"Saved: {out_path}")
 logger.info("Phase spatial regression complete")

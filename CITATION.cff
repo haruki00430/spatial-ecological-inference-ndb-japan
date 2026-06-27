@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "If you use this code or the deposited prefecture-level dataset, please cite as below."
+type: software
+title: "How Spatial Dependence Alters Ecological Interpretation: Replication Code and Prefecture-Level Dataset (NDB Open Data, Japan)"
+version: 1.0.0
+date-released: 2026-06-27
+license: MIT
+url: "https://github.com/haruki00430/spatial-ecological-inference-ndb-japan"
+repository-code: "https://github.com/haruki00430/spatial-ecological-inference-ndb-japan"
+doi: 10.5281/zenodo.XXXXXXX
+abstract: >-
+  Reproducible code and prefecture-level aggregated data (N = 47) for an
+  ecological study examining how spatial dependence alters the interpretation
+  of associations between rehabilitation claim rates and hip fracture surgery
+  rates across Japan's 47 prefectures, using NDB Open Data No.10 (FY2023).
+  OLS showed a positive association (β = 0.0005, p < 0.001), but a Spatial
+  Error Model attenuated the coefficient to non-significance (β = 0.000164,
+  p = 0.130; ΔAIC = −16.6).
+keywords:
+  - spatial epidemiology
+  - ecological study
+  - spatial error model
+  - Moran's I
+  - NDB Open Data
+  - rehabilitation
+  - hip fracture
+  - Japan
+  - reproducibility
+authors:
+  - family-names: Saito
+    given-names: Haruki
+    affiliation: "Department of Epidemiology, Fukushima Medical University School of Medicine"
+    orcid: "https://orcid.org/0009-0009-7890-6068"
+    email: haruki00430@gmail.com
+  - family-names: Ohira
+    given-names: Tetsuya
+    affiliation: "Department of Epidemiology, Fukushima Medical University School of Medicine"
+    orcid: "https://orcid.org/0000-0003-4532-7165"
+preferred-citation:
+  type: article
+  title: "How Spatial Dependence Alters Ecological Interpretation of Administrative Healthcare Data: Lessons From Rehabilitation Provision and Hip Fracture Surgery Rates in Japan"
+  authors:
+    - family-names: Saito
+      given-names: Haruki
+    - family-names: Ohira
+      given-names: Tetsuya
+  journal: "Spatial and Spatio-temporal Epidemiology"
+  year: 2026
+  notes: "Manuscript under review; update journal volume/pages and DOI when published."

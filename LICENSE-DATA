@@ -1,0 +1,14 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Haruki Saito, Tetsuya Ohira
+
+You are free to share and adapt the aggregated prefecture-level data files
+in `data/release/` under the terms of CC BY 4.0.
+
+https://creativecommons.org/licenses/by/4.0/
+
+Attribution example:
+  Saito H, Ohira T. Spatial ecological inference with Japanese NDB Open Data
+  (analysis dataset, N = 47). Zenodo. [DOI]
+
+NDB raw Excel files are NOT included and remain subject to MHLW portal terms.

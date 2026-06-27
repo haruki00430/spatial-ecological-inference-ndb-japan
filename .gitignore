@@ -18,12 +18,17 @@ ENV/
 
 02_Data/raw/
 02_Data/processed/
-*.csv
 *.xlsx
 *.parquet
 *.sqlite
 *.db
 
+# Exclude most CSVs but track public release files
+*.csv
+!data/release/
+!data/release/**
+!data/release/*.csv
+!data/release/*.md
 *.log
 05_Outputs/figures/
 05_Outputs/reports/
@@ -42,6 +47,9 @@ nul
 
 # GitHub 単一ファイル 100MB 制限（大きいジオデータは LFS かローカルのみ）
 *.geojson
+!data/master/
+!data/master/**
+!data/master/*.geojson
 *.shp
 *.dbf
 *.shx

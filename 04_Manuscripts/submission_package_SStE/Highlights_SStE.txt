@@ -1,0 +1,15 @@
+Highlights (Spatial and Spatio-temporal Epidemiology – MANDATORY, max 85 chars/bullet)
+
+• Ecological study of 47 Japanese prefectures using NDB Open Data.
+• OLS showed positive rehab–fracture association (6/6 sensitivity specs).
+• Strong spatial autocorrelation in both variables (Moran's I > 0.54).
+• Spatial Error Model attenuated association to non-significance (p=0.130).
+• Spatial diagnostics should be routine in administrative open-data studies.
+
+---
+Character counts (including leading '• ' and spaces):
+1: 66 chars ✓
+2: 73 chars ✓
+3: 70 chars ✓
+4: 75 chars ✓
+5: 76 chars ✓
